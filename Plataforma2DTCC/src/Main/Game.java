@@ -6,8 +6,13 @@ import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.image.BufferStrategy;
 import java.awt.image.BufferedImage;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.swing.JFrame;
+import Entitys.Entity;
+import Entitys.Player;
+import graphics.Spritsheet;
 
 public class Game extends Canvas implements Runnable{
 
@@ -22,11 +27,17 @@ public class Game extends Canvas implements Runnable{
 	private boolean isRunning = true;
 	
 	private BufferedImage background;
+	private List<Entity> entidades;
+	public Spritsheet spritsheet;
 	
 	public Game() {
 		this.setPreferredSize(new Dimension(WIDTH*SCALE, HEIGHT*SCALE));
 		initFrame();
 		background = new BufferedImage(WIDTH, HEIGHT, BufferedImage.TYPE_INT_RGB);
+		entidades = new ArrayList<Entity>();
+		spritsheet = new Spritsheet("/spriteSheet.png");
+		Player player = new Player(0,0,16,16,spritsheet.getSprite(0,0,16,16));
+		entidades.add(player);
 	}
 
 	public void initFrame() {
@@ -62,7 +73,10 @@ public class Game extends Canvas implements Runnable{
 	}
 	
 	public void tick() {
-		
+		for(int i =0; i < entidades.size(); i++) {
+			Entity entidade = entidades.get(i);
+			entidade.tick();
+		}
 	}
 	
 	public void render() {
@@ -74,6 +88,12 @@ public class Game extends Canvas implements Runnable{
 		Graphics g = background.getGraphics();
 		g.setColor(new Color(20, 20, 20));
 		g.fillRect(0, 0, WIDTH, HEIGHT);
+		
+		for(int i =0; i < entidades.size(); i++) {
+			Entity entidade = entidades.get(i);
+			entidade.render(g);
+		}
+		
 		g = buffer.getDrawGraphics();
 		g.drawImage(background, 0, 0, WIDTH*SCALE, HEIGHT*SCALE, null);
 		buffer.show();
@@ -99,7 +119,7 @@ public class Game extends Canvas implements Runnable{
 				delta--;
 			    }
 				if(System.currentTimeMillis() - timer >= 1000){
-					System.out.println("FPS: "+ frames);
+					//System.out.println("FPS: "+ frames);
 					frames = 0;
 					timer+=1000;
 				}

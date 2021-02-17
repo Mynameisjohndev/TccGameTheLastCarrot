@@ -5,8 +5,8 @@ import java.awt.image.BufferedImage;
 
 public class Entity {
 
-	protected int x;
-	protected int y;
+	protected double x;
+	protected double y;
 	protected int Width;
 	protected int Height;
 	protected BufferedImage sprite;
@@ -20,11 +20,11 @@ public class Entity {
 	}
 	
 	public int getX() {
-		return this.x;
+		return (int) this.x;
 	}
 
 	public int getY() {
-		return this.y;
+		return (int) this.y;
 	}
 	
 	public int getWidth() {
@@ -34,6 +34,24 @@ public class Entity {
 	public int getHeight() {
 		return this.Height;
 	}
+	
+	public void setX(int newX) {
+		this.x = newX;
+	}
+
+	public void setY(int newY) {
+		this.y = newY;
+	}
+	
+	public void setWidth(int newWidth) {
+		this.Width = newWidth;
+	}
+	
+
+	public void setHeight(int newHeight) {
+		this.Height = newHeight;
+	}
+	
 	
 	public void tick() {
 		

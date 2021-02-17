@@ -4,6 +4,8 @@ import java.awt.Canvas;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.awt.image.BufferStrategy;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
@@ -14,7 +16,7 @@ import Entitys.Entity;
 import Entitys.Player;
 import graphics.Spritsheet;
 
-public class Game extends Canvas implements Runnable{
+public class Game extends Canvas implements Runnable, KeyListener{
 
 	private static final long serialVersionUID = 1L;
 
@@ -29,14 +31,16 @@ public class Game extends Canvas implements Runnable{
 	private BufferedImage background;
 	private List<Entity> entidades;
 	public Spritsheet spritsheet;
+	public Player player;
 	
 	public Game() {
+		addKeyListener(this);
 		this.setPreferredSize(new Dimension(WIDTH*SCALE, HEIGHT*SCALE));
 		initFrame();
 		background = new BufferedImage(WIDTH, HEIGHT, BufferedImage.TYPE_INT_RGB);
 		entidades = new ArrayList<Entity>();
 		spritsheet = new Spritsheet("/spriteSheet.png");
-		Player player = new Player(0,0,16,16,spritsheet.getSprite(0,0,16,16));
+		player = new Player(0,0,16,16,spritsheet.getSprite(0,0,16,16));
 		entidades.add(player);
 	}
 
@@ -125,6 +129,36 @@ public class Game extends Canvas implements Runnable{
 				}
 			}
 		stop();
+	}
+
+	@Override
+	public void keyTyped(KeyEvent e) {
+	
+		
+	}
+
+	@Override
+	public void keyPressed(KeyEvent e) {
+	
+		if(e.getKeyCode() == KeyEvent.VK_D) {
+			player.right = true;
+		}else if(e.getKeyCode() == KeyEvent.VK_A) {
+			player.left = true;
+		}
+		
+		
+		
+	}
+
+	@Override
+	public void keyReleased(KeyEvent e) {
+	
+		if(e.getKeyCode() == KeyEvent.VK_D) {
+			player.right = false;
+		}else if(e.getKeyCode() == KeyEvent.VK_A) {
+			player.left = false;
+		}
+		
 	}
 
 }

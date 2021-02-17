@@ -1,4 +1,4 @@
-package graphics;
+package Main;
 
 import java.awt.Canvas;
 import java.awt.Color;
@@ -53,7 +53,12 @@ public class Game extends Canvas implements Runnable{
 	}
 	
 	public synchronized void stop() {
-		
+		isRunning = false;
+		try {
+			thread.join();
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
 	}
 	
 	public void tick() {
@@ -99,6 +104,7 @@ public class Game extends Canvas implements Runnable{
 					timer+=1000;
 				}
 			}
+		stop();
 	}
 
 }

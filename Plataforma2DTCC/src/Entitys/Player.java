@@ -11,7 +11,6 @@ public class Player extends Entity {
 	public boolean right,left,up,down ;
 	public double speed = 1;
 	
-	
 	public int direita = 1, esquerda = 0;
 	public int direcaoAtual = direita;
 	public int movimentacao = 0;
@@ -30,8 +29,7 @@ public class Player extends Entity {
 		
 		for (int i = 0; i < 4; i++) {
 		leftplayer[i] = Game.spritsheet.getSprite(48 - (16*i), 16, 16, 16);
-		}
-		
+		}		
 	}
 
 	public void tick() {

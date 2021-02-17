@@ -14,6 +14,7 @@ import java.util.List;
 import javax.swing.JFrame;
 import Entitys.Entity;
 import Entitys.Player;
+import World.Level;
 import graphics.Spritsheet;
 
 public class Game extends Canvas implements Runnable, KeyListener{
@@ -32,6 +33,7 @@ public class Game extends Canvas implements Runnable, KeyListener{
 	private List<Entity> entidades;
 	public static Spritsheet spritsheet;
 	public Player player;
+	public static Level world;
 	
 	public Game() {
 		addKeyListener(this);
@@ -40,6 +42,7 @@ public class Game extends Canvas implements Runnable, KeyListener{
 		background = new BufferedImage(WIDTH, HEIGHT, BufferedImage.TYPE_INT_RGB);
 		entidades = new ArrayList<Entity>();
 		spritsheet = new Spritsheet("/spriteSheet.png");
+		world = new Level("/level1.png");
 		player = new Player(0,0,16,16,spritsheet.getSprite(0,0,16,16));
 		entidades.add(player);
 	}

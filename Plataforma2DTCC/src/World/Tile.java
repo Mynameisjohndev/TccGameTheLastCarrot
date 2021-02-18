@@ -7,7 +7,7 @@ import Main.Game;
 
 public class Tile {
 
-	public static BufferedImage chao = Game.spritsheet.getSprite(0, 122, 16, 16);
+	public static BufferedImage chao = Game.spritsheet.getSprite(0, 112, 16, 16);
 	public static BufferedImage empty =  Game.spritsheet.getSprite(32, 144, 16, 16);
 	
 	public BufferedImage sprite;

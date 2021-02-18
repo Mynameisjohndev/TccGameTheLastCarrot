@@ -30,7 +30,7 @@ public class Game extends Canvas implements Runnable, KeyListener{
 	private boolean isRunning = true;
 	
 	private BufferedImage background;
-	private List<Entity> entidades;
+	public static List<Entity> entidades;
 	public static Spritsheet spritsheet;
 	public static Player player;
 	public static Level world;

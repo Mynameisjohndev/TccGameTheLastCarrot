@@ -3,8 +3,14 @@ package Entitys;
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 
+import Main.Game;
+import World.Camera;
+
 public class Entity {
 
+	public static BufferedImage chao = Game.spritsheet.getSprite(0, 112, 16, 16);
+	public static BufferedImage empty =  Game.spritsheet.getSprite(32, 144, 16, 16);	
+	
 	protected double x;
 	protected double y;
 	protected int Width;
@@ -58,7 +64,7 @@ public class Entity {
 	}
 	
 	public void render(Graphics g) {
-		g.drawImage(sprite, this.getX(), this.getY(), null);
+		g.drawImage(sprite, this.getX()-Camera.x, this.getY()-Camera.y, null);
 	}
 	
 }

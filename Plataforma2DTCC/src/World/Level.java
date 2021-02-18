@@ -27,9 +27,10 @@ public class Level {
 				for(int y = 0; y < level.getHeight(); y++) {
 					int pixelAtual = pixels[x + (y * level.getWidth())]; 
 					
-					tiles[x+(y*WIDTH)] = new Empty(x*16,y*16,Tile.empty);//PL
+						tiles[x+(y*WIDTH)] = new Empty(x*16,y*16,Tile.empty);
 					if(pixelAtual == 0xFF5fcde4) {
-						tiles[x+(y*WIDTH)] = new Empty(x*16,y*16,Tile.empty);//PLAYER
+						Game.player.setX(x*16);
+						Game.player.setY(y*16);
 					}else if(pixelAtual == 0xFF663931) {
 						tiles[x+(y*WIDTH)] = new Flor(x*16,y*16,Tile.chao);
 					}

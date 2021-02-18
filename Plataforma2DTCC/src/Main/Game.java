@@ -22,9 +22,9 @@ public class Game extends Canvas implements Runnable, KeyListener{
 	private static final long serialVersionUID = 1L;
 
 	public JFrame jframe;
-	public static int WIDTH = 160;
-	public static int HEIGHT = 120;
-	private static int SCALE = 3;
+	public static int WIDTH = 280;
+	public static int HEIGHT = 160;
+	private static int SCALE = 4;
 	
 	private Thread thread;
 	private boolean isRunning = true;
@@ -32,7 +32,7 @@ public class Game extends Canvas implements Runnable, KeyListener{
 	private BufferedImage background;
 	private List<Entity> entidades;
 	public static Spritsheet spritsheet;
-	public Player player;
+	public static Player player;
 	public static Level world;
 	
 	public Game() {
@@ -42,9 +42,9 @@ public class Game extends Canvas implements Runnable, KeyListener{
 		background = new BufferedImage(WIDTH, HEIGHT, BufferedImage.TYPE_INT_RGB);
 		entidades = new ArrayList<Entity>();
 		spritsheet = new Spritsheet("/spriteSheet.png");
-		world = new Level("/level1.png");
 		player = new Player(0,0,16,16,spritsheet.getSprite(0,0,16,16));
 		entidades.add(player);
+		world = new Level("/level1.png");
 	}
 
 	public void initFrame() {

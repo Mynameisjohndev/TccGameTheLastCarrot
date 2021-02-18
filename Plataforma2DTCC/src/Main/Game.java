@@ -22,8 +22,8 @@ public class Game extends Canvas implements Runnable, KeyListener{
 	private static final long serialVersionUID = 1L;
 
 	public JFrame jframe;
-	private static int WIDTH = 160;
-	private static int HEIGHT = 120;
+	public static int WIDTH = 160;
+	public static int HEIGHT = 120;
 	private static int SCALE = 3;
 	
 	private Thread thread;
@@ -95,6 +95,8 @@ public class Game extends Canvas implements Runnable, KeyListener{
 		Graphics g = background.getGraphics();
 		g.setColor(new Color(20, 20, 20));
 		g.fillRect(0, 0, WIDTH, HEIGHT);
+		
+		world.render(g);
 		
 		for(int i =0; i < entidades.size(); i++) {
 			Entity entidade = entidades.get(i);

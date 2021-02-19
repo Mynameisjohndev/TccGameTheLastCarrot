@@ -6,7 +6,10 @@ import java.io.IOException;
 
 import javax.imageio.ImageIO;
 
+import Entitys.Carrot;
 import Entitys.Entity;
+import Entitys.Goblin;
+import Entitys.Heart;
 import Entitys.Sky;
 import Entitys.Solido;
 import Main.Game;
@@ -32,12 +35,24 @@ public class Level {
 					
 					tiles[x+(y*WIDTH)] = new Flor(x*16,y*16,Entity.empty);
 					if(pixelAtual == 0xFF5fcde4) {
+						//PLAYER
 						Game.player.setX(x*16);
 						Game.player.setY(y*16);
 					}else if(pixelAtual == 0xFF663931) {
+						//BLO FICTICIO TROCAR DEPOIS
 						Solido grama = new Solido(x*16,y*16,16,16,Entity.chao);
 						Game.entidades.add(grama);
+					}else if(pixelAtual == 0xFFff0000) {
+						Goblin goblin = new Goblin(x*16,y*16,16,16,Entity.goblin);
+						Game.goblin.add(goblin);
+					}else if(pixelAtual == 0xFF00ff36) {
+						Heart heart = new Heart(x*16,y*16,16,16,Entity.heart);
+						Game.heart.add(heart);
+					}else if(pixelAtual == 0xFFff5100) {
+						Carrot carrot = new Carrot(x*16,y*16,16,16,Entity.carrot);
+						Game.carrot.add(carrot);
 					}else if(pixelAtual == 0xFF0b1a9b) {
+						//CEU
 						Sky ceu = new Sky(x*16,y*16,16,16,Entity.sky);
 						Game.sky.add(ceu);
 						ceu.setY(150);

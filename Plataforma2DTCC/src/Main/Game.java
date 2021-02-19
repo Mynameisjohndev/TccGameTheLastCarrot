@@ -13,7 +13,10 @@ import java.util.List;
 
 import javax.swing.JFrame;
 
+import Entitys.Carrot;
 import Entitys.Entity;
+import Entitys.Goblin;
+import Entitys.Heart;
 import Entitys.Player;
 import Entitys.Sky;
 import World.Level;
@@ -39,6 +42,10 @@ public class Game extends Canvas implements Runnable, KeyListener{
 	public static List<Sky> sky;
 	public static Spritsheet skySprite;
 	
+	public static List<Carrot> carrot;
+	public static List<Heart> heart;
+	public static List<Goblin> goblin; 
+	
 	public Game() {
 		addKeyListener(this);
 		this.setPreferredSize(new Dimension(WIDTH*SCALE, HEIGHT*SCALE));
@@ -48,6 +55,11 @@ public class Game extends Canvas implements Runnable, KeyListener{
 		spritsheet = new Spritsheet("/spriteSheet.png");
 		sky = new ArrayList<Sky>();
 		skySprite = new Spritsheet("/ceusprite.png");
+		
+		carrot = new ArrayList<Carrot>();
+		heart = new ArrayList<Heart>();
+		goblin = new ArrayList<Goblin>();
+		
 		player = new Player(0,0,16,16,spritsheet.getSprite(0,0,16,16));
 		entidades.add(player);
 		world = new Level("/level1.png");
@@ -86,6 +98,18 @@ public class Game extends Canvas implements Runnable, KeyListener{
 	}
 	
 	public void tick() {
+		for(int i =0; i < goblin.size(); i++) {
+			Goblin go = goblin.get(i);
+			go.tick();
+		}
+		for(int i =0; i < heart.size(); i++) {
+			Heart h = heart.get(i);
+			h.tick();
+		}
+		for(int i =0; i < carrot.size(); i++) {
+			Carrot c = carrot.get(i);
+			c.tick();
+		}
 		for(int i =0; i < entidades.size(); i++) {
 			Entity entidade = entidades.get(i);
 			entidade.tick();
@@ -108,6 +132,7 @@ public class Game extends Canvas implements Runnable, KeyListener{
 		
 		world.render(g);
 		
+		
 		for(int i =0; i < sky.size(); i++) {
 			Sky skyE = sky.get(i);
 			skyE.render(g);
@@ -117,8 +142,19 @@ public class Game extends Canvas implements Runnable, KeyListener{
 			Entity entidade = entidades.get(i);
 			entidade.render(g);
 		}
-		
-		
+				
+		for(int i =0; i < goblin.size(); i++) {
+			Goblin go = goblin.get(i);
+			go.render(g);
+		}
+		for(int i =0; i < heart.size(); i++) {
+			Heart h = heart.get(i);
+			h.render(g);;
+		}
+		for(int i =0; i < carrot.size(); i++) {
+			Carrot c = carrot.get(i);
+			c.render(g);
+		}
 		g = buffer.getDrawGraphics();
 		g.drawImage(background, 0, 0, WIDTH*SCALE, HEIGHT*SCALE, null);
 		buffer.show();

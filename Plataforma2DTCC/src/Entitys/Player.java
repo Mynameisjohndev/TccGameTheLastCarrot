@@ -105,6 +105,10 @@ public class Player extends Entity {
 		}
 		
 		
+		if(damage(this.getX(), this.getY())) {
+			life-=0.05;
+		}
+		
 		Camera.x = Camera.clamp(this.getX() - (Game.WIDTH/2), 0, World.Level.WIDTH*16 - Game.WIDTH);
 		Camera.y = Camera.clamp(this.getY() - (Game.HEIGHT/2), 0, World.Level.HEIGHT*16 - Game.HEIGHT);
 		
@@ -116,6 +120,20 @@ public class Player extends Entity {
 			Entity entidade = Game.entidades.get(i);
 			if(entidade instanceof Solido) {
 				Rectangle solido = new Rectangle(entidade.getX() + maskx, entidade.getY() + masky, maskw,maskh);
+				if(player.intersects(solido)) {
+					return true;
+				}
+			}
+		}
+		return false;
+	}
+	
+	public boolean damage(int nextx, int nexty) {
+		Rectangle player = new Rectangle(nextx + maskx, nexty + masky, maskw, maskh);
+		for(int i = 0; i < Game.goblin.size(); i++) {
+			Goblin goblin = Game.goblin.get(i);
+			if(goblin instanceof Goblin) {
+				Rectangle solido = new Rectangle(goblin.getX() + maskx, goblin.getY() + masky, maskw,maskh);
 				if(player.intersects(solido)) {
 					return true;
 				}

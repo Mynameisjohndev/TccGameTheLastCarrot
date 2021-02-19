@@ -46,10 +46,13 @@ public class Game extends Canvas implements Runnable, KeyListener{
 	public static List<Heart> heart;
 	public static List<Goblin> goblin; 
 	
+	public playerInterface lifeBar;
+	
 	public Game() {
 		addKeyListener(this);
 		this.setPreferredSize(new Dimension(WIDTH*SCALE, HEIGHT*SCALE));
 		initFrame();
+		lifeBar = new playerInterface();
 		background = new BufferedImage(WIDTH, HEIGHT, BufferedImage.TYPE_INT_RGB);
 		entidades = new ArrayList<Entity>();
 		spritsheet = new Spritsheet("/spriteSheet.png");
@@ -155,6 +158,9 @@ public class Game extends Canvas implements Runnable, KeyListener{
 			Carrot c = carrot.get(i);
 			c.render(g);
 		}
+		
+		lifeBar.render(g);
+		
 		g = buffer.getDrawGraphics();
 		g.drawImage(background, 0, 0, WIDTH*SCALE, HEIGHT*SCALE, null);
 		buffer.show();

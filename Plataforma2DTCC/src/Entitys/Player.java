@@ -26,6 +26,8 @@ public class Player extends Entity {
 	public int jumpHeigth = 26;
 	public int jumpFrames = 0;
 	public int quantidadeDePulos = 0; 
+	
+	public static double life = 100, maxLife = 100;
 	 
 	public Player(int x, int y, int Width, int Height, BufferedImage sprite) {
 		super(x, y, Width, Height, sprite);

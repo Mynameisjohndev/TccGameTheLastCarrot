@@ -151,7 +151,10 @@ public class Game extends Canvas implements Runnable, KeyListener{
 			player.left = true;
 		}
 		
-		
+		 if(e.getKeyCode() == KeyEvent.VK_SPACE) {
+		    	player.jump = false;
+		    	player.quantidadeDePulos+=1;
+		    }
 		
 	}
 
@@ -163,6 +166,10 @@ public class Game extends Canvas implements Runnable, KeyListener{
 		}else if(e.getKeyCode() == KeyEvent.VK_A) {
 			player.left = false;
 		}
+		
+		if(e.getKeyCode() == KeyEvent.VK_SPACE) {
+			player.jump = true;
+	    }
 		
 	}
 

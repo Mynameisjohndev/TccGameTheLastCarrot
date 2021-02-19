@@ -7,7 +7,6 @@ import java.awt.image.BufferedImage;
 import Main.Game;
 import World.Camera;
 
-
 public class Player extends Entity {
 
 	public boolean right,left,up,down ;
@@ -20,7 +19,13 @@ public class Player extends Entity {
 	private BufferedImage rightplayer[];
 	private BufferedImage leftplayer[];
 	
-	 private int maskx = 0, masky = 0, maskw = 15, maskh = 16;
+	private int maskx = 0, masky = 0, maskw = 15, maskh = 16;
+	 
+	public boolean jump = false;
+	public boolean isJump = false;
+	public int jumpHeigth = 26;
+	public int jumpFrames = 0;
+	public int quantidadeDePulos = 0; 
 	 
 	public Player(int x, int y, int Width, int Height, BufferedImage sprite) {
 		super(x, y, Width, Height, sprite);
@@ -39,7 +44,7 @@ public class Player extends Entity {
 	public void tick() {
 		movimentacao = 0;
 		
-		if(!coliding((int)x, (int)(y+1))) {
+		if(!coliding((int)x, (int)(y+1)) && isJump == false) {
 			y+=2;
 		}
 			
@@ -56,12 +61,36 @@ public class Player extends Entity {
 			direcaoAtual = esquerda;
 		}
 		
-		if(down) {
-			y+=speed;
-		}
-		if(up) {
-			y-=speed;
-		}
+		if(quantidadeDePulos >= 0 && quantidadeDePulos <=1) { 
+			   if(jump) {
+			   	if(coliding(this.getX(), this.getY()+1) || !coliding(this.getX(), this.getY()+1)) {
+				  
+				   isJump = true;
+			   	}
+		   	}
+		   }
+		
+		if(isJump) {
+			   if(!coliding(this.getX(), this.getY()-2)) {
+				   y-=2;
+				   jumpFrames+=2;
+				   //Jump animation sao as particulas que saem do personagem no pulo}
+				   if(jumpFrames == jumpHeigth) {
+					   //gravidade+=1;
+					   isJump = false;
+					   jump = false;
+					   jumpFrames = 0;
+				   }
+			   }else {
+				   isJump = false;
+				   jump = false;
+				   jumpFrames = 0;  
+			   }
+		   }
+		
+		if(coliding(this.getX(), this.getY()+1)) {
+			   quantidadeDePulos = 0;
+		 }
 		
 		if(movimentacao == 1) {
 			frames++;

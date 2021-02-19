@@ -50,12 +50,22 @@ public class Player extends Entity {
 			y+=2;
 		}
 		
-		if(damage(this.getX(), this.getY())) {
+		
 			for(int i =0; i< Game.goblin.size(); i++) {
-				isJump = true;
-				Game.goblin.remove(goblinAtual);
+				Goblin e = Game.goblin.get(i);
+				if(e instanceof Goblin) {
+					if(damage(this.getX(), this.getY())) {
+						isJump = true;
+						goblinAtual.life--;
+						if(goblinAtual.life == 0) {
+							Game.goblin.remove(goblinAtual);
+							break;
+						}
+					}
+				}
+				break;
 			}
-		}
+		
 			
 		
 		if(right && !coliding((int)(x+speed), this.getY())) {

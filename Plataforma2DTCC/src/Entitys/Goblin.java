@@ -14,12 +14,15 @@ public class Goblin extends Entity {
 	public int frames = 0, maxFrames = 5, index = 0, maxIndex = 3;
 	private int maskx = 0, masky = 0, maskw = 15, maskh = 16;
 	
+	public int life = 3;
+	
 	public Goblin(int x, int y, int Width, int Height, BufferedImage sprite) {
 		super(x, y, Width, Height, sprite);
 	}
 
 	
 	public void tick() {
+		
 		if(!coliding((int)x, (int)(y+1))) {
 			y+=2;
 		}

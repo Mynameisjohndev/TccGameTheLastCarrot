@@ -10,6 +10,7 @@ public class Entity {
 
 	public static BufferedImage chao = Game.spritsheet.getSprite(0, 112, 16, 16);
 	public static BufferedImage empty =  Game.spritsheet.getSprite(32, 144, 16, 16);	
+	public static BufferedImage sky =  Game.skySprite.getSprite(0, 0, 1471, 400);	
 	
 	protected double x;
 	protected double y;

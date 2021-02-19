@@ -7,6 +7,7 @@ import java.io.IOException;
 import javax.imageio.ImageIO;
 
 import Entitys.Entity;
+import Entitys.Sky;
 import Entitys.Solido;
 import Main.Game;
 
@@ -36,6 +37,10 @@ public class Level {
 					}else if(pixelAtual == 0xFF663931) {
 						Solido grama = new Solido(x*16,y*16,16,16,Entity.chao);
 						Game.entidades.add(grama);
+					}else if(pixelAtual == 0xFF0b1a9b) {
+						Sky ceu = new Sky(x*16,y*16,16,16,Entity.sky);
+						Game.sky.add(ceu);
+						ceu.setY(150);
 					}
 					
 				}

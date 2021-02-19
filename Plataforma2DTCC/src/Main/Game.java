@@ -12,8 +12,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.JFrame;
+
 import Entitys.Entity;
 import Entitys.Player;
+import Entitys.Sky;
 import World.Level;
 import graphics.Spritsheet;
 
@@ -22,8 +24,8 @@ public class Game extends Canvas implements Runnable, KeyListener{
 	private static final long serialVersionUID = 1L;
 
 	public JFrame jframe;
-	public static int WIDTH = 280;
-	public static int HEIGHT = 160;
+	public static int WIDTH = 260;
+	public static int HEIGHT = 140;
 	private static int SCALE = 4;
 	
 	private Thread thread;
@@ -34,6 +36,8 @@ public class Game extends Canvas implements Runnable, KeyListener{
 	public static Spritsheet spritsheet;
 	public static Player player;
 	public static Level world;
+	public static List<Sky> sky;
+	public static Spritsheet skySprite;
 	
 	public Game() {
 		addKeyListener(this);
@@ -42,6 +46,8 @@ public class Game extends Canvas implements Runnable, KeyListener{
 		background = new BufferedImage(WIDTH, HEIGHT, BufferedImage.TYPE_INT_RGB);
 		entidades = new ArrayList<Entity>();
 		spritsheet = new Spritsheet("/spriteSheet.png");
+		sky = new ArrayList<Sky>();
+		skySprite = new Spritsheet("/ceusprite.png");
 		player = new Player(0,0,16,16,spritsheet.getSprite(0,0,16,16));
 		entidades.add(player);
 		world = new Level("/level1.png");
@@ -84,6 +90,10 @@ public class Game extends Canvas implements Runnable, KeyListener{
 			Entity entidade = entidades.get(i);
 			entidade.tick();
 		}
+		for(int i =0; i < sky.size(); i++) {
+			Sky skyE = sky.get(i);
+			skyE.tick();
+		}
 	}
 	
 	public void render() {
@@ -98,10 +108,16 @@ public class Game extends Canvas implements Runnable, KeyListener{
 		
 		world.render(g);
 		
+		for(int i =0; i < sky.size(); i++) {
+			Sky skyE = sky.get(i);
+			skyE.render(g);
+		}
+
 		for(int i =0; i < entidades.size(); i++) {
 			Entity entidade = entidades.get(i);
 			entidade.render(g);
 		}
+		
 		
 		g = buffer.getDrawGraphics();
 		g.drawImage(background, 0, 0, WIDTH*SCALE, HEIGHT*SCALE, null);
@@ -151,10 +167,10 @@ public class Game extends Canvas implements Runnable, KeyListener{
 			player.left = true;
 		}
 		
-		 if(e.getKeyCode() == KeyEvent.VK_SPACE) {
-		    	player.jump = false;
-		    	player.quantidadeDePulos+=1;
-		    }
+		if(e.getKeyCode() == KeyEvent.VK_SPACE) {
+		    player.jump = false;
+		    player.quantidadeDePulos+=1;
+		}
 		
 	}
 

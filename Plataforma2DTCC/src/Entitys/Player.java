@@ -23,12 +23,12 @@ public class Player extends Entity {
 	 
 	public boolean jump = false;
 	public boolean isJump = false;
-	public int jumpHeigth = 26;
+	public int jumpHeigth = 30;
 	public int jumpFrames = 0;
 	public int quantidadeDePulos = 0; 
 	
 	public static double life = 100, maxLife = 100;
-	 
+	public Goblin goblinAtual; 
 	public Player(int x, int y, int Width, int Height, BufferedImage sprite) {
 		super(x, y, Width, Height, sprite);
 		rightplayer = new BufferedImage[4];
@@ -48,6 +48,13 @@ public class Player extends Entity {
 		
 		if(!coliding((int)x, (int)(y+1)) && isJump == false) {
 			y+=2;
+		}
+		
+		if(damage(this.getX(), this.getY())) {
+			for(int i =0; i< Game.goblin.size(); i++) {
+				isJump = true;
+				Game.goblin.remove(goblinAtual);
+			}
 		}
 			
 		
@@ -135,6 +142,7 @@ public class Player extends Entity {
 			if(goblin instanceof Goblin) {
 				Rectangle solido = new Rectangle(goblin.getX() + maskx, goblin.getY() + masky, maskw,maskh);
 				if(player.intersects(solido)) {
+					goblinAtual = goblin;
 					return true;
 				}
 			}

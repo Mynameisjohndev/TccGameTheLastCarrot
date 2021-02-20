@@ -20,8 +20,7 @@ public class Menu {
 			up = false;
 			currentOption--;
 			if(currentOption < 0) 
-				currentOption =	maxOption;
-			
+				currentOption =	maxOption;	
 		}
 		
 		if(down) {
@@ -39,7 +38,7 @@ public class Menu {
 				pause = false;
 				
 			}else if(options[currentOption] == "CARREGAR JOGO") {
-				
+			//Carrega jogo salvo	
 			}else if(options[currentOption] == "SAIR"){
 				System.exit(1);
 			}

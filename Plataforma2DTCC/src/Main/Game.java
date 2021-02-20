@@ -48,6 +48,8 @@ public class Game extends Canvas implements Runnable, KeyListener{
 	
 	public playerInterface lifeBar;
 	
+	public int level = 1, maxLevel = 2;
+	
 	public Game() {
 		addKeyListener(this);
 		this.setPreferredSize(new Dimension(WIDTH*SCALE, HEIGHT*SCALE));
@@ -101,6 +103,16 @@ public class Game extends Canvas implements Runnable, KeyListener{
 	}
 	
 	public void tick() {
+		
+		if(goblin.size() == 0) {
+			level++;
+			if(level > maxLevel) {
+				level = 1;
+			}
+			String Level = "level"+level+".png";
+			World.Level.newLevel(Level);
+		}
+		
 		for(int i =0; i < goblin.size(); i++) {
 			Goblin go = goblin.get(i);
 			go.tick();

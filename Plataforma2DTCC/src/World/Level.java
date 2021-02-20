@@ -3,6 +3,7 @@ package World;
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
+import java.util.ArrayList;
 
 import javax.imageio.ImageIO;
 
@@ -10,9 +11,11 @@ import Entitys.Carrot;
 import Entitys.Entity;
 import Entitys.Goblin;
 import Entitys.Heart;
+import Entitys.Player;
 import Entitys.Sky;
 import Entitys.Solido;
 import Main.Game;
+import graphics.Spritsheet;
 
 
 public class Level {
@@ -82,6 +85,21 @@ public class Level {
 				tile.render(g);
 			}
 		}
+	}
+	
+	public static void newLevel(String level) {
+		Game.entidades = new ArrayList<Entity>();
+		Game.spritsheet = new Spritsheet("/spriteSheet.png");
+		Game.sky = new ArrayList<Sky>();
+		Game.skySprite = new Spritsheet("/ceusprite.png");
+		
+		Game.carrot = new ArrayList<Carrot>();
+		Game.heart = new ArrayList<Heart>();
+		Game.goblin = new ArrayList<Goblin>();
+		
+		Game.player = new Player(0,0,16,16,Game.spritsheet.getSprite(0,0,16,16));
+		Game.entidades.add(Game.player);
+		Game.world = new Level("/"+level);
 	}
 	
 }

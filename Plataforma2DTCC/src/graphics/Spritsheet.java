@@ -20,7 +20,7 @@ public class Spritsheet {
 	}
 	
 	public BufferedImage getSprite(int x, int y, int width, int height) {
-		return spritsheet.getSubimage(x-Camera.x, y-Camera.y, width, height);
+		return spritsheet.getSubimage(x, y, width, height);
 	}
 	
 }

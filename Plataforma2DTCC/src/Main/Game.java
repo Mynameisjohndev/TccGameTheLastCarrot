@@ -3,7 +3,9 @@ package Main;
 import java.awt.Canvas;
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.Graphics;
+import java.awt.Graphics2D;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.image.BufferStrategy;
@@ -47,8 +49,9 @@ public class Game extends Canvas implements Runnable, KeyListener{
 	public static List<Goblin> goblin; 
 	
 	public playerInterface lifeBar;
-	
 	public int level = 1, maxLevel = 2;
+	
+	public static String gameState = "Normal";
 	
 	public Game() {
 		addKeyListener(this);
@@ -104,34 +107,40 @@ public class Game extends Canvas implements Runnable, KeyListener{
 	
 	public void tick() {
 		
-		if(goblin.size() == 0) {
-			level++;
-			if(level > maxLevel) {
-				level = 1;
+		if(gameState == "Normal") {
+			
+			if(goblin.size() == 0) {
+				level++;
+				if(level > maxLevel) {
+					level = 1;
+				}
+				String Level = "level"+level+".png";
+				World.Level.newLevel(Level);
 			}
-			String Level = "level"+level+".png";
-			World.Level.newLevel(Level);
-		}
-		
-		for(int i =0; i < goblin.size(); i++) {
-			Goblin go = goblin.get(i);
-			go.tick();
-		}
-		for(int i =0; i < heart.size(); i++) {
-			Heart h = heart.get(i);
-			h.tick();
-		}
-		for(int i =0; i < carrot.size(); i++) {
-			Carrot c = carrot.get(i);
-			c.tick();
-		}
-		for(int i =0; i < entidades.size(); i++) {
-			Entity entidade = entidades.get(i);
-			entidade.tick();
-		}
-		for(int i =0; i < sky.size(); i++) {
-			Sky skyE = sky.get(i);
-			skyE.tick();
+			
+			for(int i =0; i < goblin.size(); i++) {
+				Goblin go = goblin.get(i);
+				go.tick();
+			}
+			for(int i =0; i < heart.size(); i++) {
+				Heart h = heart.get(i);
+				h.tick();
+			}
+			for(int i =0; i < carrot.size(); i++) {
+				Carrot c = carrot.get(i);
+				c.tick();
+			}
+			for(int i =0; i < entidades.size(); i++) {
+				Entity entidade = entidades.get(i);
+				entidade.tick();
+			}
+			for(int i =0; i < sky.size(); i++) {
+				Sky skyE = sky.get(i);
+				skyE.tick();
+			}
+			
+		}else if(gameState == "gameOver"){
+			System.out.println("Game over");
 		}
 	}
 	
@@ -172,9 +181,19 @@ public class Game extends Canvas implements Runnable, KeyListener{
 		}
 		
 		lifeBar.render(g);
-		
 		g = buffer.getDrawGraphics();
 		g.drawImage(background, 0, 0, WIDTH*SCALE, HEIGHT*SCALE, null);
+		
+		if(gameState == "gameOver"){
+			Graphics2D g2 = (Graphics2D) g;
+			 g2.setColor(new Color(0,0,0,100));
+			 g2.fillRect(0, 0, WIDTH*SCALE, HEIGHT*SCALE);
+			 g.setFont(new Font("arial",Font.BOLD,28));
+			 g.setColor(Color.WHITE);
+			 g.drawString("GAME OVER", WIDTH*SCALE/2 - 100, HEIGHT*SCALE/2 - 30);
+		     g.drawString("PRESS ENTER TO RESTART", WIDTH*SCALE/2 - 200, HEIGHT*SCALE/2 + 40);
+		}
+		
 		buffer.show();
 	}
 	

@@ -123,11 +123,16 @@ public class Player extends Entity {
 		
 		
 		if(damage(this.getX(), this.getY())) {
-			life-=0.05;
+			life-=0.75;
+		}
+		if(life <= 0) {;
+			Game.gameState = "gameOver";
 		}
 		
-		Camera.x = Camera.clamp(this.getX() - (Game.WIDTH/2), 0, World.Level.WIDTH*16 - Game.WIDTH);
-		Camera.y = Camera.clamp(this.getY() - (Game.HEIGHT/2), 0, World.Level.HEIGHT*16 - Game.HEIGHT);
+			Camera.x = Camera.clamp(this.getX()-30 - (Game.WIDTH/2), 0, World.Level.WIDTH*16 - Game.WIDTH);
+			Camera.y = Camera.clamp(this.getY() - (Game.HEIGHT/2), 0, World.Level.HEIGHT*16 - Game.HEIGHT);
+		
+		
 		
 	}
 	

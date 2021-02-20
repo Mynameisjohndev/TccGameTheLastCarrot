@@ -48,9 +48,6 @@ public class Player extends Entity {
 		
 		if(!coliding((int)x, (int)(y+1)) && isJump == false) {
 			y+=2;
-		}
-		
-		
 			for(int i =0; i< Game.goblin.size(); i++) {
 				Goblin e = Game.goblin.get(i);
 				if(e instanceof Goblin) {
@@ -65,6 +62,9 @@ public class Player extends Entity {
 				}
 				break;
 			}
+			
+		}
+		
 		
 			
 		

@@ -52,6 +52,9 @@ public class Game extends Canvas implements Runnable, KeyListener{
 	public int level = 1, maxLevel = 2;
 	
 	public static String gameState = "Normal";
+	public boolean messageGameOver = true;
+	public int messageGameOverFrames = 0;
+	public boolean restartGame = false;
 	
 	public Game() {
 		addKeyListener(this);
@@ -108,7 +111,7 @@ public class Game extends Canvas implements Runnable, KeyListener{
 	public void tick() {
 		
 		if(gameState == "Normal") {
-			
+			restartGame = false;
 			if(goblin.size() == 0) {
 				level++;
 				if(level > maxLevel) {
@@ -140,7 +143,23 @@ public class Game extends Canvas implements Runnable, KeyListener{
 			}
 			
 		}else if(gameState == "gameOver"){
-			System.out.println("Game over");
+			messageGameOverFrames ++;
+			if(messageGameOverFrames  == 15) {
+				messageGameOverFrames = 0;
+				if(messageGameOver) {
+					messageGameOver = false;					
+				}else {					
+					messageGameOver = true;
+				}
+				if(restartGame) {
+					Game.player.life = 100;
+					restartGame = false;
+					gameState = "Normal";
+					level = 1;
+					String Level = "level"+level+".png";
+					World.Level.newLevel(Level);
+				}
+			}
 		}
 	}
 	
@@ -191,6 +210,7 @@ public class Game extends Canvas implements Runnable, KeyListener{
 			 g.setFont(new Font("arial",Font.BOLD,28));
 			 g.setColor(Color.WHITE);
 			 g.drawString("GAME OVER", WIDTH*SCALE/2 - 100, HEIGHT*SCALE/2 - 30);
+			 if(messageGameOver)
 		     g.drawString("PRESS ENTER TO RESTART", WIDTH*SCALE/2 - 200, HEIGHT*SCALE/2 + 40);
 		}
 		
@@ -243,6 +263,10 @@ public class Game extends Canvas implements Runnable, KeyListener{
 		if(e.getKeyCode() == KeyEvent.VK_SPACE) {
 		    player.jump = false;
 		    player.quantidadeDePulos+=1;
+		}
+		
+		if(e.getKeyCode() == KeyEvent.VK_ENTER) {
+		    restartGame = true;
 		}
 		
 	}

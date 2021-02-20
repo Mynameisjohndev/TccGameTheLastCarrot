@@ -31,7 +31,7 @@ public class Game extends Canvas implements Runnable, KeyListener{
 	public JFrame jframe;
 	public static int WIDTH = 260;
 	public static int HEIGHT = 140;
-	private static int SCALE = 4;
+	public static int SCALE = 4;
 	
 	private Thread thread;
 	private boolean isRunning = true;
@@ -56,6 +56,8 @@ public class Game extends Canvas implements Runnable, KeyListener{
 	public int messageGameOverFrames = 0;
 	public boolean restartGame = false;
 	
+	public Menu menu;
+	
 	public Game() {
 		addKeyListener(this);
 		this.setPreferredSize(new Dimension(WIDTH*SCALE, HEIGHT*SCALE));
@@ -74,8 +76,8 @@ public class Game extends Canvas implements Runnable, KeyListener{
 		player = new Player(0,0,16,16,spritsheet.getSprite(0,0,16,16));
 		entidades.add(player);
 		world = new Level("/level1.png");
+		menu = new Menu();
 	}
-
 	public void initFrame() {
 		jframe = new JFrame("TCC");
 		jframe.add(this);
@@ -141,26 +143,27 @@ public class Game extends Canvas implements Runnable, KeyListener{
 				Sky skyE = sky.get(i);
 				skyE.tick();
 			}
-			
-		}else if(gameState == "gameOver"){
-			messageGameOverFrames ++;
-			if(messageGameOverFrames  == 15) {
-				messageGameOverFrames = 0;
-				if(messageGameOver) {
-					messageGameOver = false;					
-				}else {					
-					messageGameOver = true;
+		
+			}else if(gameState == "gameOver"){
+				messageGameOverFrames++;
+				if(messageGameOverFrames == 25) {
+					messageGameOverFrames = 0;
+					if(messageGameOver) 
+						messageGameOver = false;
+					else 
+						messageGameOver = true;
 				}
 				if(restartGame) {
 					Game.player.life = 100;
 					restartGame = false;
-					gameState = "Normal";
-					level = 1;
-					String Level = "level"+level+".png";
-					World.Level.newLevel(Level);
+					gameState = "Normal";		
+					this.level = 1;
+					String newLevel = "level"+level+".png";
+					World.Level.newLevel(newLevel);
 				}
+			}else if(gameState == "Menu") {
+				menu.tick();
 			}
-		}
 	}
 	
 	public void render() {
@@ -212,7 +215,9 @@ public class Game extends Canvas implements Runnable, KeyListener{
 			 g.drawString("GAME OVER", WIDTH*SCALE/2 - 100, HEIGHT*SCALE/2 - 30);
 			 if(messageGameOver)
 		     g.drawString("PRESS ENTER TO RESTART", WIDTH*SCALE/2 - 200, HEIGHT*SCALE/2 + 40);
-		}
+		}else if(gameState == "Menu") {
+			 menu.render(g);
+		 }
 		
 		buffer.show();
 	}
@@ -254,26 +259,39 @@ public class Game extends Canvas implements Runnable, KeyListener{
 	@Override
 	public void keyPressed(KeyEvent e) {
 	
+		//MOVIMENTAÇÃO
 		if(e.getKeyCode() == KeyEvent.VK_D) {
 			player.right = true;
 		}else if(e.getKeyCode() == KeyEvent.VK_A) {
 			player.left = true;
 		}
 		
+		//JUMP
 		if(e.getKeyCode() == KeyEvent.VK_SPACE) {
 		    player.jump = false;
 		    player.quantidadeDePulos+=1;
 		}
 		
+		
 		if(e.getKeyCode() == KeyEvent.VK_ENTER) {
-		    restartGame = true;
+			if(gameState == "gameOver") {				
+				restartGame = true;
+			}
+		
 		}
+		
+		if(e.getKeyCode() == KeyEvent.VK_ESCAPE) {
+	    	//gameState = "Menu";
+	    	//menu.pause = true;
+	    }
+		
 		
 	}
 
 	@Override
 	public void keyReleased(KeyEvent e) {
 	
+		//MOVIMENTAÇÃO
 		if(e.getKeyCode() == KeyEvent.VK_D) {
 			player.right = false;
 		}else if(e.getKeyCode() == KeyEvent.VK_A) {
@@ -283,6 +301,8 @@ public class Game extends Canvas implements Runnable, KeyListener{
 		if(e.getKeyCode() == KeyEvent.VK_SPACE) {
 			player.jump = true;
 	    }
+		
+		
 		
 	}
 

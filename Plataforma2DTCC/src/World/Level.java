@@ -42,10 +42,13 @@ public class Level {
 						Game.player.setX(x*16);
 						Game.player.setY(y*16);
 					}else if(pixelAtual == 0xFF663931) {
-						//BLO FICTICIO TROCAR DEPOIS
-						Solido grama = new Solido(x*16,y*16,16,16,Entity.chao);
-						Game.entidades.add(grama);
-					}else if(pixelAtual == 0xFFff0000) {
+						Solido chao = new Solido(x*16,y*16,16,16,Entity.chao);
+						Game.entidades.add(chao);
+					}else if(pixelAtual == 0xFF4b692f) {
+						Solido chaoGrama = new Solido(x*16,y*16,16,16,Entity.chaoGrama);
+						Game.entidades.add(chaoGrama);
+					}
+					else if(pixelAtual == 0xFFff0000) {
 						Goblin goblin = new Goblin(x*16,y*16,16,16,Entity.goblin);
 						Game.goblin.add(goblin);
 					}else if(pixelAtual == 0xFF00ff36) {

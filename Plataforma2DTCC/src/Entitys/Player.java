@@ -29,6 +29,10 @@ public class Player extends Entity {
 	
 	public static double life = 100, maxLife = 100;
 	public Goblin goblinAtual; 
+	
+	public boolean ceuright = false;
+	public boolean ceuleft = false;
+	
 	public Player(int x, int y, int Width, int Height, BufferedImage sprite) {
 		super(x, y, Width, Height, sprite);
 		rightplayer = new BufferedImage[4];
@@ -65,19 +69,25 @@ public class Player extends Entity {
 			
 		}
 		
-		
-			
+		if(coliding((int)(x+speed), this.getY())) {
+			ceuright = false;	
+		}
+		if(coliding((int)(x-speed), this.getY())) {
+			ceuleft = false;	
+		}	
 		
 		if(right && !coliding((int)(x+speed), this.getY())) {
 			x+=speed;
 			movimentacao = 1;
 			direcaoAtual = direita;
+			ceuright = true;
 		}
 		
 		if(left && !coliding((int)(x-speed), this.getY())) {
 			x-=speed;
 			movimentacao = 1;
 			direcaoAtual = esquerda;
+			ceuleft = true;
 		}
 		
 		if(quantidadeDePulos >= 0 && quantidadeDePulos <=1) { 

@@ -58,6 +58,7 @@ public class Level {
 						//CEU
 						Sky ceu = new Sky(x*16,y*16,16,16,Entity.sky);
 						Game.sky.add(ceu);
+						ceu.setX(-50);
 						ceu.setY(150);
 					}
 					

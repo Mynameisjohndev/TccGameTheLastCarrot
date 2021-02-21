@@ -131,11 +131,12 @@ public class Player extends Entity {
 			Game.gameState = "gameOver";
 		}
 		
+		if(heart(this.getX(), this.getY())) {
+			
+		}
+		
 			Camera.x = Camera.clamp(this.getX()-30 - (Game.WIDTH/2), 0, World.Level.WIDTH*16 - Game.WIDTH);
 			Camera.y = Camera.clamp(this.getY() - (Game.HEIGHT/2), 0, World.Level.HEIGHT*16 - Game.HEIGHT);
-		
-		
-		
 	}
 	
 	public boolean coliding(int nextx, int nexty) {
@@ -160,6 +161,24 @@ public class Player extends Entity {
 				Rectangle solido = new Rectangle(goblin.getX() + maskx, goblin.getY() + masky, maskw,maskh);
 				if(player.intersects(solido)) {
 					goblinAtual = goblin;
+					return true;
+				}
+			}
+		}
+		return false;
+	}
+	
+	public boolean heart(int nextx, int nexty) {
+		Rectangle player = new Rectangle(nextx + maskx, nexty + masky, maskw, maskh);
+		for(int i = 0; i < Game.heart.size(); i++) {
+			Heart heart = Game.heart.get(i);
+			if(heart instanceof Heart) {
+				Rectangle solido = new Rectangle(heart.getX() + maskx, heart.getY() + masky, maskw,maskh);
+				if(player.intersects(solido)) {
+					if(life < 100) {
+						Game.heart.remove(heart);
+						life +=5;
+					}
 					return true;
 				}
 			}

@@ -7,8 +7,11 @@ import Main.Game;
 
 public class Carrot extends Entity{
 
-	
 	private int maskx = 0, masky = 0, maskw = 15, maskh = 16;
+	public boolean jump = false;
+	public boolean isJump = false;
+	public int jumpHeigth = 18;
+	public int jumpFrames = 0;
 	
 	public Carrot(int x, int y, int Width, int Height, BufferedImage sprite) {
 		super(x, y, Width, Height, sprite);
@@ -16,11 +19,26 @@ public class Carrot extends Entity{
 	}
 
 	public void tick() {
-		if(!coliding(this.getX(), this.getY()+1) ) {
+		if(!coliding(this.getX(), this.getY()+1) && jump == false) {
 			y+=1;
 		}
 		
+		if(coliding(this.getX(), this.getY()+1)) {
+			jump = true;
+		}
 		
+		if(jump) {
+			 y-=1;
+			 jumpFrames+=1;
+			 if(jumpFrames == jumpHeigth) {
+				   //gravidade+=1;
+				   isJump = false;
+				   jump = false;
+				   jumpFrames = 0;
+			   }
+		}else {
+			jump = false;
+		}
 		
 	}
 	

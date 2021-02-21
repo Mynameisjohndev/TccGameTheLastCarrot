@@ -10,6 +10,7 @@ import javax.imageio.ImageIO;
 import Entitys.Carrot;
 import Entitys.Entity;
 import Entitys.Goblin;
+import Entitys.Grass;
 import Entitys.Heart;
 import Entitys.Player;
 import Entitys.Sky;
@@ -46,6 +47,10 @@ public class Level {
 						Game.entidades.add(chao);
 					}else if(pixelAtual == 0xFF4b692f) {
 						Solido chaoGrama = new Solido(x*16,y*16,16,16,Entity.chaoGrama);
+						Game.entidades.add(chaoGrama);
+					}else if(pixelAtual == 0xFF11bf22) {
+						//GRASS
+						Grass chaoGrama = new Grass(x*16,y*16,16,16,Entity.grass);
 						Game.entidades.add(chaoGrama);
 					}
 					else if(pixelAtual == 0xFFff0000) {

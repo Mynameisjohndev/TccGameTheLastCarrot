@@ -91,8 +91,7 @@ public class Menu {
 				pause = false;
 				break;
 			case "life":
-				Player.life = Integer.parseInt(spl2[1]);
-				Player.life = Player.life;
+				Game.player.life = Double.parseDouble(spl2[1]);
 				break;
 			}
 		}	

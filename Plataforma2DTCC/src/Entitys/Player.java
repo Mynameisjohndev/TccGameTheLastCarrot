@@ -121,7 +121,9 @@ public class Player extends Entity {
 			}
 		}
 		
-		
+		if(life > maxLife) {
+			life = 100;
+		}
 		if(damage(this.getX(), this.getY())) {
 			life-=0.75;
 		}

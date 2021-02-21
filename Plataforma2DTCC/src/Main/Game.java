@@ -49,7 +49,7 @@ public class Game extends Canvas implements Runnable, KeyListener{
 	public static List<Goblin> goblin; 
 	
 	public playerInterface lifeBar;
-	public int level = 1, maxLevel = 2;
+	public static int level = 1, maxLevel = 2;
 	
 	public static String gameState = "Menu";
 	public boolean messageGameOver = true;
@@ -122,6 +122,7 @@ public class Game extends Canvas implements Runnable, KeyListener{
 				int[]opt2 = {this.level,(int) player.life};
 				Menu.saveGame(opt1,opt2,10);
 				System.out.println("Jogo salvo");
+				
 			}
 			
 			if(goblin.size() == 0) {

@@ -23,6 +23,7 @@ import Entitys.Player;
 import Entitys.Sky;
 import World.Level;
 import graphics.Spritsheet;
+import graphics.playerInterface;
 
 public class Game extends Canvas implements Runnable, KeyListener{
 

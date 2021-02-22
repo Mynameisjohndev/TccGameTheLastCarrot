@@ -14,20 +14,17 @@ public class playerInterface {
 		
 		g.setColor(new Color(28,28,28));
 		g.fillRect(22, 20, 50, 7);
-		
 		g.setColor(new Color(220,20,60));
 		g.fillRect(22, 20, (int)((Game.player.life/Game.player.maxLife)*50), 7);
 		g.setColor(Color.white);
-		g.fillRect(22, 20, (int)((Game.player.life/Game.player.maxLife)*50), 1);
-		
-		g.setColor(Color.black);
-		g.fillRect(19, 31, 52, 7);
-		
-		g.setColor(Color.red);
-		g.fillRect(20, 32, 50, 5);
-		
-		g.setColor(Color.blue);
-		g.fillRect(20, 32, (int)((Game.player.mana/Game.player.maxMana)*50), 5);
+		g.fillRect(22, 21, (int)((Game.player.life/Game.player.maxLife)*50), 1);
+	
+		g.setColor(new Color(28,28,28));
+		g.fillRect(22, 33, 50, 7);
+		g.setColor(new Color(108, 150, 228));
+		g.fillRect(22, 33, (int)((Game.player.mana/Game.player.maxMana)*50), 7);
+		g.setColor(Color.white);
+		g.fillRect(22, 34, (int)((Game.player.mana/Game.player.maxMana)*50), 1);
 		
 		g.drawImage(Entity.hud,17,17, null);
 		

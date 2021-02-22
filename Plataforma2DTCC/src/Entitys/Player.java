@@ -28,6 +28,8 @@ public class Player extends Entity {
 	public int quantidadeDePulos = 0; 
 	
 	public static double life = 100, maxLife = 100;
+	public static int mana = 100, maxMana = 100;
+	
 	public Goblin goblinAtual; 
 	
 	public boolean ceuright = false;

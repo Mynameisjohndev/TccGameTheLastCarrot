@@ -93,13 +93,13 @@ public class Player extends Entity {
 		}
 		
 		if(quantidadeDePulos >= 0 && quantidadeDePulos <=1) { 
-			   if(jump) {
+			if(jump) {
 			   	if(coliding(this.getX(), this.getY()+1) || !coliding(this.getX(), this.getY()+1)) {
 				  
 				   isJump = true;
 			   	}
-		   	}
-		   }
+		    }
+		}
 		
 		if(isJump) {
 			   if(!coliding(this.getX(), this.getY()-2)) {
@@ -121,7 +121,7 @@ public class Player extends Entity {
 		
 		if(coliding(this.getX(), this.getY()+1)) {
 			   quantidadeDePulos = 0;
-		 }
+		}
 		
 		if(movimentacao == 1) {
 			frames++;
@@ -142,13 +142,10 @@ public class Player extends Entity {
 		if(life <= 0) {;
 			Game.gameState = "gameOver";
 		}
+	
 		
-		if(heart(this.getX(), this.getY())) {
-			
-		}
-		
-			Camera.x = Camera.clamp(this.getX()-30 - (Game.WIDTH/2), 0, World.Level.WIDTH*16 - Game.WIDTH);
-			Camera.y = Camera.clamp(this.getY() - (Game.HEIGHT/2), 0, World.Level.HEIGHT*16 - Game.HEIGHT);
+		Camera.x = Camera.clamp(this.getX() - (Game.WIDTH/2), 0, World.Level.WIDTH*16 - Game.WIDTH);
+		Camera.y = Camera.clamp(this.getY() - (Game.HEIGHT/2), 0, World.Level.HEIGHT*16 - Game.HEIGHT);
 	}
 	
 	public boolean coliding(int nextx, int nexty) {

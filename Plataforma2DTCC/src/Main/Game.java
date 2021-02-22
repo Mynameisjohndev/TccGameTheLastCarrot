@@ -19,6 +19,7 @@ import Entitys.Carrot;
 import Entitys.Entity;
 import Entitys.Goblin;
 import Entitys.Heart;
+import Entitys.Hud;
 import Entitys.Player;
 import Entitys.Sky;
 import World.Level;
@@ -62,6 +63,7 @@ public class Game extends Canvas implements Runnable, KeyListener{
 	public Menu menu;
 	public boolean saveGame = false;
 	
+	public static Spritsheet hud;
 	public Game() {
 		addKeyListener(this);
 		this.setPreferredSize(new Dimension(WIDTH*SCALE, HEIGHT*SCALE));
@@ -72,11 +74,10 @@ public class Game extends Canvas implements Runnable, KeyListener{
 		spritsheet = new Spritsheet("/spriteSheet.png");
 		sky = new ArrayList<Sky>();
 		skySprite = new Spritsheet("/ceusprite.png");
-		
+		hud = new Spritsheet("/hud.png");
 		carrot = new ArrayList<Carrot>();
 		heart = new ArrayList<Heart>();
 		goblin = new ArrayList<Goblin>();
-		
 		player = new Player(0,0,16,16,spritsheet.getSprite(0,0,16,16));
 		entidades.add(player);
 		world = new Level("/level1.png");
@@ -197,6 +198,7 @@ public class Game extends Canvas implements Runnable, KeyListener{
 			Sky skyE = sky.get(i);
 			skyE.render(g);
 		}
+		
 
 		for(int i =0; i < entidades.size(); i++) {
 			Entity entidade = entidades.get(i);

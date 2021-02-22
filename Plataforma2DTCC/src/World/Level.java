@@ -12,6 +12,7 @@ import Entitys.Entity;
 import Entitys.Goblin;
 import Entitys.Grass;
 import Entitys.Heart;
+import Entitys.Hud;
 import Entitys.Player;
 import Entitys.Sky;
 import Entitys.Solido;
@@ -67,8 +68,7 @@ public class Level {
 						Sky ceu = new Sky(x*16,y*16,16,16,Entity.sky);
 						Game.sky.add(ceu);
 						ceu.setX(-50);
-					}
-					
+					}	
 				}
 			}
 		

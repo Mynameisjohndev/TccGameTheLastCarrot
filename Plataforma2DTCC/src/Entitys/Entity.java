@@ -17,6 +17,8 @@ public class Entity {
 	public static BufferedImage goblin = Game.spritsheet.getSprite(144, 144, 16, 16);
 	public static BufferedImage carrot = Game.spritsheet.getSprite(80, 32, 16, 16);
 	public static BufferedImage heart = Game.spritsheet.getSprite(96, 32, 16, 16);
+	public static BufferedImage hud = Game.hud.getSprite(0, 0, 80, 24);
+	
 	
 	protected double x;
 	protected double y;

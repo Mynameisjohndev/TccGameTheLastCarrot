@@ -1,5 +1,6 @@
 package Entitys;
 
+import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
@@ -19,6 +20,7 @@ public class Player extends Entity {
 	private BufferedImage rightplayer[];
 	private BufferedImage leftplayer[];
 	
+	private int maskxp = 2, maskyp = 0, maskwp = 11, maskhp = 16;
 	private int maskx = 0, masky = 0, maskw = 15, maskh = 16;
 	 
 	public boolean jump = false;
@@ -149,7 +151,7 @@ public class Player extends Entity {
 	}
 	
 	public boolean coliding(int nextx, int nexty) {
-		Rectangle player = new Rectangle(nextx + maskx, nexty + masky, maskw, maskh);
+		Rectangle player = new Rectangle(nextx + maskxp, nexty + maskyp, maskwp, maskhp);
 		for(int i = 0; i < Game.entidades.size(); i++) {
 			Entity entidade = Game.entidades.get(i);
 			if(entidade instanceof Solido) {
@@ -198,14 +200,20 @@ public class Player extends Entity {
 	public void render(Graphics g) {
 		
 		if(direcaoAtual == direita && movimentacao == 1) {
+			//g.setColor(Color.red);
+			//g.fillRect(this.getX()+maskxp-Camera.x, this.getY()+maskyp-Camera.y, maskwp,maskhp);
+			
 			g.drawImage(rightplayer[index], this.getX()-Camera.x, this.getY()-Camera.y, null);
 		}if(direcaoAtual == direita && movimentacao == 0) {
+			
 			g.drawImage(rightplayer[0], this.getX()-Camera.x, this.getY()-Camera.y, null);
 		}
 		
 		if(direcaoAtual == esquerda && movimentacao == 1) {
+			
 			g.drawImage(leftplayer[index], this.getX()-Camera.x, this.getY()-Camera.y, null);
 		}if(direcaoAtual == esquerda && movimentacao == 0) {
+			
 			g.drawImage(leftplayer[0], this.getX()-Camera.x, this.getY()-Camera.y, null);
 		}
 		

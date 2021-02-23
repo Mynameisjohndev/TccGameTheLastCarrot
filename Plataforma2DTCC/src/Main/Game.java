@@ -206,9 +206,20 @@ public class Game extends Canvas implements Runnable, KeyListener{
 		}
 		
 
+		
 		for(int i =0; i < entidades.size(); i++) {
 			Entity entidade = entidades.get(i);
 			entidade.render(g);
+		}
+		for(int i =0; i < entidades.size(); i++) {
+			Entity entidade = entidades.get(i);
+			if(entidade instanceof Player) {				
+				entidade.render(g);
+			}
+		}
+		for(int i =0; i < npc1.size(); i++) {
+			NPC1 npc = npc1.get(i);
+			npc.render(g);
 		}
 				
 		for(int i =0; i < goblin.size(); i++) {
@@ -222,10 +233,6 @@ public class Game extends Canvas implements Runnable, KeyListener{
 		for(int i =0; i < carrot.size(); i++) {
 			Carrot c = carrot.get(i);
 			c.render(g);
-		}
-		for(int i =0; i < npc1.size(); i++) {
-			NPC1 npc = npc1.get(i);
-			npc.render(g);
 		}
 		
 		lifeBar.render(g);

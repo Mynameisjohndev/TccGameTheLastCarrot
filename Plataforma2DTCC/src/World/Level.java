@@ -71,7 +71,6 @@ public class Level {
 					}else if(pixelAtual == 0xFF0c7389) {
 						NPC1 npc = new NPC1(x*16,y*16,16,16,Entity.NPC1);
 						Game.npc1.add(npc);
-						System.out.println(Game.npc1.size());
 					}
 				}
 			}

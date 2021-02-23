@@ -1,5 +1,7 @@
 package Entitys;
 
+import java.awt.Color;
+import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
@@ -13,7 +15,12 @@ public class NPC1  extends Entity{
 	public int frames = 0, maxFrames = 16, index = 0, maxIndex = 1;
 	private BufferedImage npc[];
 	private int maskx = 0, masky = 0, maskw = 16, maskh = 16;
+	
 	public boolean colisao = false;
+	public boolean chat = false;
+	public boolean finalChat = false;
+	
+	public String[] frases = new String [5];
 	
 	public NPC1(int x, int y, int Width, int Height, BufferedImage sprite) {
 		super(x, y, Width, Height, sprite);
@@ -23,6 +30,9 @@ public class NPC1  extends Entity{
 			npc[i] = Game.spritsheet.getSprite(80 + (16*i), 128, 16, 16);
 		}
 		
+		frases[0] = "Olá, bem vindo ao jogo : )";
+		frases[0] = "Sua missão é derrotar estes inimigos : )";
+		frases[0] = "Olá, bem vindo ao jogo : )";
 	}
 	
 	
@@ -38,12 +48,14 @@ public class NPC1  extends Entity{
 			}
 		}
 		
-		
 		if(coliding(this.getX(), this.getY())) {
 			colisao = true;
-		}else {
-			colisao = false;
 		}
+		
+		if(!coliding(this.getX(), this.getY())) {
+			chat = false;
+		}
+		
 	}
 	
 	public boolean coliding(int nextx, int nexty) {
@@ -62,9 +74,26 @@ public class NPC1  extends Entity{
 	
 	public void render(Graphics g) {
 		g.drawImage(npc[index], this.getX()-Camera.x, this.getY()-Camera.y, null);
-		if(colisao == true) {
+		
+		if(colisao == true && chat == false) {
 			g.drawImage(Entity.pressc, this.getX()-Camera.x, this.getY()-Camera.y - 12, null);			
 		}
+		
+		if(coliding(this.getX(), this.getY()) && chat == true) {
+			Game.player.chat = true;
+			
+			g.setColor(new Color(0,0,0,100));
+			g.fillRect(10, 71, Game.WIDTH-20, 58);
+			
+			g.setFont(new Font("Arial", Font.BOLD, 9));
+			g.setColor(Color.black);
+			g.drawString("Olá, bem vindo ao jogo : )", 15,80);
+			g.drawString("Sabemos que para efetuar um calculo você precisa", 15,89);
+				 	
+		}else {
+			Game.player.chat = false;
+		}
+		
 	}
 
 }

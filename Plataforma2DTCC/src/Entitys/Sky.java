@@ -12,11 +12,11 @@ public class Sky extends Entity{
 	}
 
 	public void tick() {
-		if(Game.player.right && Game.player.ceuright == true) {
+		if(Game.player.right && Game.player.ceuright == true && Game.player.chat == false) {
 			x-=Game.player.speed - 0.75;
 		}
 		
-		if(Game.player.left && Game.player.ceuleft == true ) {
+		if(Game.player.left && Game.player.ceuleft == true && Game.player.chat == false) {
 			x+=Game.player.speed - 0.75;	
 		}
 		

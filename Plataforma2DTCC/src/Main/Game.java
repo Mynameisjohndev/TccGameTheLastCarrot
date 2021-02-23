@@ -65,6 +65,7 @@ public class Game extends Canvas implements Runnable, KeyListener{
 	
 	public static Spritsheet hud;
 	public static List<NPC1> npc1;
+	public static NPC1 ncpteste;
 	public Game() {
 		addKeyListener(this);
 		this.setPreferredSize(new Dimension(WIDTH*SCALE, HEIGHT*SCALE));
@@ -313,6 +314,14 @@ public class Game extends Canvas implements Runnable, KeyListener{
 			if(gameState == "Menu") {				
 				menu.enter = true;
 			}
+			if(player.chat == true) {
+				player.chat = false;
+				for(int i = 0; i < npc1.size();i++) {	
+					NPC1 n = npc1.get(i);
+					n.chat = false;
+				    n.colisao = false;
+				}
+			}
 		}
 		
 		if(e.getKeyCode() == KeyEvent.VK_ESCAPE) {
@@ -323,6 +332,14 @@ public class Game extends Canvas implements Runnable, KeyListener{
 		//SALVAR
 		if(e.getKeyCode() == KeyEvent.VK_T) {
 	    	saveGame = true;
+	    }
+		
+		//CONVERSA NPC
+		if(e.getKeyCode() == KeyEvent.VK_C) {
+			for(int i = 0; i < npc1.size();i++) {	
+				NPC1 n = npc1.get(i);
+				n.chat = true;
+			}
 	    }
 		
 	}
@@ -350,9 +367,7 @@ public class Game extends Canvas implements Runnable, KeyListener{
 			if(gameState == "Menu") {
 				menu.up = true;
 			}
-		}
-		
-		
+		}	
 		
 	}
 

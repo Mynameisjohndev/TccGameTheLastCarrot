@@ -1,6 +1,5 @@
 package Entitys;
 
-import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
@@ -33,9 +32,11 @@ public class Player extends Entity {
 	public static int mana = 100, maxMana = 100;
 	
 	public Goblin goblinAtual; 
-	
+
 	public boolean ceuright = false;
 	public boolean ceuleft = false;
+	
+	public static boolean chat = false;
 	
 	public Player(int x, int y, int Width, int Height, BufferedImage sprite) {
 		super(x, y, Width, Height, sprite);
@@ -73,13 +74,14 @@ public class Player extends Entity {
 			
 		}
 		
+		
+		if(chat == false) {
 		if(coliding((int)(x+speed), this.getY())) {
 			ceuright = false;	
 		}
 		if(coliding((int)(x-speed), this.getY())) {
 			ceuleft = false;	
 		}	
-		
 		if(right && !coliding((int)(x+speed), this.getY())) {
 			x+=speed;
 			movimentacao = 1;
@@ -120,6 +122,8 @@ public class Player extends Entity {
 				   jumpFrames = 0;  
 			   }
 		   }
+		}
+		
 		
 		if(coliding(this.getX(), this.getY()+1)) {
 			   quantidadeDePulos = 0;
@@ -145,6 +149,10 @@ public class Player extends Entity {
 			Game.gameState = "gameOver";
 		}
 	
+		
+		if(npc(this.getX(), this.getY())) {
+			
+		}
 		
 		Camera.x = Camera.clamp(this.getX() - (Game.WIDTH/2), 0, World.Level.WIDTH*16 - Game.WIDTH);
 		Camera.y = Camera.clamp(this.getY() - (Game.HEIGHT/2), 0, World.Level.HEIGHT*16 - Game.HEIGHT);
@@ -197,10 +205,27 @@ public class Player extends Entity {
 		return false;
 	}
 	
+	public boolean npc(int nextx, int nexty) {
+		Rectangle player = new Rectangle(nextx + maskx, nexty + masky, maskw, maskh);
+		for(int i = 0; i < Game.npc1.size(); i++) {
+			NPC1 npc = Game.npc1.get(i);
+			if(npc instanceof NPC1) {
+				Rectangle solido = new Rectangle(npc.getX() + maskx, npc.getY() + masky, maskw,maskh);
+				if(player.intersects(solido)) {
+					npc.colisao = true;
+					return true;
+				}
+			}
+			npc.colisao = false;
+		}
+		return false;
+	}
+	
 	public void render(Graphics g) {
 		
 		if(direcaoAtual == direita && movimentacao == 1) {
 			//g.setColor(Color.red);
+			//
 			//g.fillRect(this.getX()+maskxp-Camera.x, this.getY()+maskyp-Camera.y, maskwp,maskhp);
 			
 			g.drawImage(rightplayer[index], this.getX()-Camera.x, this.getY()-Camera.y, null);

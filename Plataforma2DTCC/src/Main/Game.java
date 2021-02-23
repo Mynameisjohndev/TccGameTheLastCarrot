@@ -19,7 +19,7 @@ import Entitys.Carrot;
 import Entitys.Entity;
 import Entitys.Goblin;
 import Entitys.Heart;
-import Entitys.Hud;
+import Entitys.NPC1;
 import Entitys.Player;
 import Entitys.Sky;
 import World.Level;
@@ -64,6 +64,7 @@ public class Game extends Canvas implements Runnable, KeyListener{
 	public boolean saveGame = false;
 	
 	public static Spritsheet hud;
+	public static List<NPC1> npc1;
 	public Game() {
 		addKeyListener(this);
 		this.setPreferredSize(new Dimension(WIDTH*SCALE, HEIGHT*SCALE));
@@ -78,6 +79,7 @@ public class Game extends Canvas implements Runnable, KeyListener{
 		carrot = new ArrayList<Carrot>();
 		heart = new ArrayList<Heart>();
 		goblin = new ArrayList<Goblin>();
+		npc1 = new ArrayList<NPC1>();
 		player = new Player(0,0,16,16,spritsheet.getSprite(0,0,16,16));
 		entidades.add(player);
 		world = new Level("/level1.png");
@@ -154,6 +156,10 @@ public class Game extends Canvas implements Runnable, KeyListener{
 				Entity entidade = entidades.get(i);
 				entidade.tick();
 			}
+			for(int i =0; i < npc1.size(); i++) {
+				NPC1 npc = npc1.get(i);
+				npc.tick();
+			}
 			for(int i =0; i < sky.size(); i++) {
 				Sky skyE = sky.get(i);
 				skyE.tick();
@@ -216,6 +222,10 @@ public class Game extends Canvas implements Runnable, KeyListener{
 		for(int i =0; i < carrot.size(); i++) {
 			Carrot c = carrot.get(i);
 			c.render(g);
+		}
+		for(int i =0; i < npc1.size(); i++) {
+			NPC1 npc = npc1.get(i);
+			npc.render(g);
 		}
 		
 		lifeBar.render(g);

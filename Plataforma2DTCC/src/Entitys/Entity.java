@@ -12,12 +12,14 @@ public class Entity {
 	public static BufferedImage chaoGrama = Game.spritsheet.getSprite(16, 112, 16, 16);
 	public static BufferedImage grass = Game.spritsheet.getSprite(0, 128, 16, 16);
 	public static BufferedImage empty =  Game.spritsheet.getSprite(32, 144, 16, 16);	
-	public static BufferedImage sky =  Game.skySprite.getSprite(0, 0, 1471, 400);
-	
 	public static BufferedImage goblin = Game.spritsheet.getSprite(144, 144, 16, 16);
 	public static BufferedImage carrot = Game.spritsheet.getSprite(80, 32, 16, 16);
 	public static BufferedImage heart = Game.spritsheet.getSprite(96, 32, 16, 16);
+	public static BufferedImage NPC1 = Game.spritsheet.getSprite(80, 128, 16, 16);
+	
+	///sprites diferntes
 	public static BufferedImage hud = Game.hud.getSprite(0, 0, 130, 32);
+	public static BufferedImage sky =  Game.skySprite.getSprite(0, 0, 1471, 400);
 	
 	
 	protected double x;

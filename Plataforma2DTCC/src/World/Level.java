@@ -12,7 +12,7 @@ import Entitys.Entity;
 import Entitys.Goblin;
 import Entitys.Grass;
 import Entitys.Heart;
-import Entitys.Hud;
+import Entitys.NPC1;
 import Entitys.Player;
 import Entitys.Sky;
 import Entitys.Solido;
@@ -68,7 +68,11 @@ public class Level {
 						Sky ceu = new Sky(x*16,y*16,16,16,Entity.sky);
 						Game.sky.add(ceu);
 						ceu.setX(-50);
-					}	
+					}else if(pixelAtual == 0xFF0c7389) {
+						NPC1 npc = new NPC1(x*16,y*16,16,16,Entity.NPC1);
+						Game.npc1.add(npc);
+						System.out.println(Game.npc1.size());
+					}
 				}
 			}
 		

@@ -19,8 +19,11 @@ public class NPC1  extends Entity{
 	public boolean colisao = false;
 	public boolean chat = false;
 	public boolean finalChat = false;
-	
+	public static boolean enter = false;
 	public String[] frases = new String [5];
+	public  String[] options = {"1","2","3"};
+	public  int currentOption = 0;
+	public int maxOption = options.length-1;
 	
 	public NPC1(int x, int y, int Width, int Height, BufferedImage sprite) {
 		super(x, y, Width, Height, sprite);
@@ -31,12 +34,19 @@ public class NPC1  extends Entity{
 		}
 		
 		frases[0] = "Olá, bem vindo ao jogo : )";
-		frases[0] = "Sua missão é derrotar estes inimigos : )";
-		frases[0] = "Olá, bem vindo ao jogo : )";
+		frases[1] = "Sua missão é derrotar estes inimigos : )";
 	}
 	
 	
 	public void tick() {
+		
+		if(enter) {
+			enter = false;
+			currentOption++;
+			if(currentOption >maxOption) {
+				currentOption = maxOption;
+			}
+		}
 		
 		if(movimentacao == 0) {
 			frames++;
@@ -54,6 +64,7 @@ public class NPC1  extends Entity{
 		
 		if(!coliding(this.getX(), this.getY())) {
 			chat = false;
+			currentOption = 0;
 		}
 		
 	}
@@ -79,7 +90,7 @@ public class NPC1  extends Entity{
 			g.drawImage(Entity.pressc, this.getX()-Camera.x, this.getY()-Camera.y - 12, null);			
 		}
 		
-		if(coliding(this.getX(), this.getY()) && chat == true) {
+		if(coliding(this.getX(), this.getY()) && chat == true && currentOption < maxOption) {
 			Game.player.chat = true;
 			
 			g.setColor(new Color(0,0,0,100));
@@ -87,8 +98,11 @@ public class NPC1  extends Entity{
 			
 			g.setFont(new Font("Arial", Font.BOLD, 9));
 			g.setColor(Color.black);
-			g.drawString("Olá, bem vindo ao jogo : )", 15,80);
-			g.drawString("Sabemos que para efetuar um calculo você precisa", 15,89);
+			g.drawString(frases[currentOption], 15,80);
+			//g.drawString("Sabemos que para efetuar uma soma você precisa", 15,89);
+			//g.drawString("efetuar uma adição, exemplo: Você tem uma maça e", 15,98);
+			//g.drawString("você acaba comprando outra, logo você possui 2", 15,107);
+			//g.drawString("maças. ", 15,116);
 				 	
 		}else {
 			Game.player.chat = false;

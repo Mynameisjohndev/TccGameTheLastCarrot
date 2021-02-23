@@ -43,14 +43,6 @@ public class Menu {
 			
 		}
 		
-		if(up) {
-			System.out.println("cima");
-			up = false;
-			currentOption--;
-			if(currentOption < 0) 
-				currentOption =	maxOption;	
-		}
-		
 		if(down) {
 			System.out.println("baixo");
 			down = false;

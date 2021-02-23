@@ -315,11 +315,9 @@ public class Game extends Canvas implements Runnable, KeyListener{
 				menu.enter = true;
 			}
 			if(player.chat == true) {
-				player.chat = false;
 				for(int i = 0; i < npc1.size();i++) {	
 					NPC1 n = npc1.get(i);
-					n.chat = false;
-				    n.colisao = false;
+					n.enter = true;
 				}
 			}
 		}

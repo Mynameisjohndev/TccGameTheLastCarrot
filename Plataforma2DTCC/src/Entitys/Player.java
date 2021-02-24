@@ -37,7 +37,8 @@ public class Player extends Entity {
 	public boolean ceuleft = false;
 	public static boolean chat = false;
 	
-	public int itemLife = 0;
+	public static int itemLife = 0;
+	public static int itemCarrot = 0;
 	
 	public Player(int x, int y, int Width, int Height, BufferedImage sprite) {
 		super(x, y, Width, Height, sprite);
@@ -149,12 +150,14 @@ public class Player extends Entity {
 	
 		
 		if(npc(this.getX(), this.getY())) {
-			
+			//VERIFICA A COLISAO COM O NPC
 		}
 		
 		Camera.x = Camera.clamp(this.getX() - (Game.WIDTH/2), 0, World.Level.WIDTH*16 - Game.WIDTH);
 		Camera.y = Camera.clamp(this.getY() - (Game.HEIGHT/2), 0, World.Level.HEIGHT*16 - Game.HEIGHT);
+		
 		checkLIfe();
+		checkCarrot();
 	}
 	
 	public void checkLIfe() {
@@ -172,6 +175,18 @@ public class Player extends Entity {
 						Game.heart.remove(heart);
 						System.out.println(itemLife);
 					}
+				}
+			}
+		}
+	}
+	
+	public void checkCarrot() {
+		for(int i = 0; i < Game.carrot.size(); i++) {
+			Carrot carrot = Game.carrot.get(i);
+			if(carrot instanceof Carrot) {
+				if(Entity.isColidding(this, carrot)) {
+					itemCarrot++;
+					Game.carrot.remove(carrot);
 				}
 			}
 		}
@@ -205,24 +220,7 @@ public class Player extends Entity {
 		}
 		return false;
 	}
-	
-//	public boolean heart(int nextx, int nexty) {
-//		Rectangle player = new Rectangle(nextx + maskx, nexty + masky, maskw, maskh);
-//		for(int i = 0; i < Game.heart.size(); i++) {
-//			Heart heart = Game.heart.get(i);
-//			if(heart instanceof Heart) {
-//				Rectangle solido = new Rectangle(heart.getX() + maskx, heart.getY() + masky, maskw,maskh);
-//				if(player.intersects(solido)) {
-//					if(life < 100) {
-//						Game.heart.remove(heart);
-//						life +=5;
-//					}
-//					return true;
-//				}
-//			}
-//		}
-//		return false;
-//	}
+
 	
 	public boolean npc(int nextx, int nexty) {
 		Rectangle player = new Rectangle(nextx + maskx, nexty + masky, maskw, maskh);

@@ -33,7 +33,7 @@ public class Game extends Canvas implements Runnable, KeyListener{
 	public JFrame jframe;
 	public static int WIDTH = 260;
 	public static int HEIGHT = 140;
-	public static int SCALE = 4;
+	public static int SCALE = 3;
 	
 	private Thread thread;
 	private boolean isRunning = true;

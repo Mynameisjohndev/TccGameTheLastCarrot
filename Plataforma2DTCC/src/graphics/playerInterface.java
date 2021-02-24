@@ -1,6 +1,7 @@
 package graphics;
 
 import java.awt.Color;
+import java.awt.Font;
 import java.awt.Graphics;
 
 import Entitys.Entity;
@@ -27,8 +28,9 @@ public class playerInterface {
 		g.fillRect(10, 19, (int)((Game.player.mana/Game.player.maxMana)*50), 1);
 		
 		g.drawImage(Entity.hud,5,2, null);
-		
-		
+		g.setColor(Color.white);	
+		g.setFont(new Font("arial",Font.BOLD,8));
+		g.drawString("" + Game.player.itemLife, 123, 32);
 	}
 	
 }

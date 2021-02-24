@@ -1,6 +1,7 @@
 package Entitys;
 
 import java.awt.Graphics;
+import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
 
 import Main.Game;
@@ -8,6 +9,9 @@ import World.Camera;
 
 public class Entity {
 
+	private int maskx = 0, masky = 0, maskw = 16, maskh = 16;
+	 
+	
 	public static BufferedImage chao = Game.spritsheet.getSprite(0, 112, 16, 16);
 	public static BufferedImage chaoGrama = Game.spritsheet.getSprite(16, 112, 16, 16);
 	public static BufferedImage grass = Game.spritsheet.getSprite(0, 128, 16, 16);
@@ -73,6 +77,12 @@ public class Entity {
 	
 	public void tick() {
 		
+	}
+	
+	public static boolean isColidding(Entity e1,Entity e2){
+		Rectangle e1Mask = new Rectangle(e1.getX() + e1.maskx,e1.getY()+e1.masky,e1.maskw,e1.maskh);
+		Rectangle e2Mask = new Rectangle(e2.getX() + e2.maskx,e2.getY()+e2.masky,e1.maskw,e1.maskh);
+		return e1Mask.intersects(e2Mask);
 	}
 	
 	public void render(Graphics g) {

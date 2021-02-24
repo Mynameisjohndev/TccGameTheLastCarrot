@@ -21,8 +21,8 @@ public class NPC1  extends Entity{
 	public boolean finalChat = false;
 	public static boolean enter = false;
 	public String[] frases = new String [5];
-	public  String[] options = {"1","2","3"};
-	public  int currentOption = 0;
+	public String[] options = {"1","2","3"};
+	public int currentOption = 0;
 	public int maxOption = options.length-1;
 	
 	public NPC1(int x, int y, int Width, int Height, BufferedImage sprite) {
@@ -98,12 +98,7 @@ public class NPC1  extends Entity{
 			
 			g.setFont(new Font("Arial", Font.BOLD, 9));
 			g.setColor(Color.black);
-			g.drawString(frases[currentOption], 15,80);
-			//g.drawString("Sabemos que para efetuar uma soma você precisa", 15,89);
-			//g.drawString("efetuar uma adição, exemplo: Você tem uma maça e", 15,98);
-			//g.drawString("você acaba comprando outra, logo você possui 2", 15,107);
-			//g.drawString("maças. ", 15,116);
-				 	
+			g.drawString(frases[currentOption], 15,80);		 	
 		}else {
 			Game.player.chat = false;
 		}

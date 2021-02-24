@@ -35,8 +35,9 @@ public class Player extends Entity {
 
 	public boolean ceuright = false;
 	public boolean ceuleft = false;
-	
 	public static boolean chat = false;
+	
+	public int itemLife = 0;
 	
 	public Player(int x, int y, int Width, int Height, BufferedImage sprite) {
 		super(x, y, Width, Height, sprite);
@@ -73,8 +74,7 @@ public class Player extends Entity {
 			}
 			
 		}
-		
-		
+
 		if(chat == false) {
 		if(coliding((int)(x+speed), this.getY())) {
 			ceuright = false;	
@@ -96,7 +96,8 @@ public class Player extends Entity {
 			ceuleft = true;
 		}
 		
-		if(quantidadeDePulos >= 0 && quantidadeDePulos <=1) { 
+		}
+		if(quantidadeDePulos >= 0 && quantidadeDePulos <=1 && chat == false) { 
 			if(jump) {
 			   	if(coliding(this.getX(), this.getY()+1) || !coliding(this.getX(), this.getY()+1)) {
 				  
@@ -122,7 +123,7 @@ public class Player extends Entity {
 				   jumpFrames = 0;  
 			   }
 		   }
-		}
+		
 		
 		
 		if(coliding(this.getX(), this.getY()+1)) {
@@ -139,9 +140,6 @@ public class Player extends Entity {
 			}
 		}
 		
-		if(life > maxLife) {
-			life = 100;
-		}
 		if(damage(this.getX(), this.getY())) {
 			life-=0.75;
 		}
@@ -156,6 +154,27 @@ public class Player extends Entity {
 		
 		Camera.x = Camera.clamp(this.getX() - (Game.WIDTH/2), 0, World.Level.WIDTH*16 - Game.WIDTH);
 		Camera.y = Camera.clamp(this.getY() - (Game.HEIGHT/2), 0, World.Level.HEIGHT*16 - Game.HEIGHT);
+		checkLIfe();
+	}
+	
+	public void checkLIfe() {
+		for(int i = 0; i < Game.heart.size(); i++) {
+			Heart heart = Game.heart.get(i);
+			if(heart instanceof Heart) {
+				if(Entity.isColidding(this, heart)) {
+					if(life > maxLife) {
+						life = 100;
+					}else if(life < 100) {
+						life+=2;
+						Game.heart.remove(heart);
+					}else if(life == 100) {
+						itemLife++;
+						Game.heart.remove(heart);
+						System.out.println(itemLife);
+					}
+				}
+			}
+		}
 	}
 	
 	public boolean coliding(int nextx, int nexty) {
@@ -187,23 +206,23 @@ public class Player extends Entity {
 		return false;
 	}
 	
-	public boolean heart(int nextx, int nexty) {
-		Rectangle player = new Rectangle(nextx + maskx, nexty + masky, maskw, maskh);
-		for(int i = 0; i < Game.heart.size(); i++) {
-			Heart heart = Game.heart.get(i);
-			if(heart instanceof Heart) {
-				Rectangle solido = new Rectangle(heart.getX() + maskx, heart.getY() + masky, maskw,maskh);
-				if(player.intersects(solido)) {
-					if(life < 100) {
-						Game.heart.remove(heart);
-						life +=5;
-					}
-					return true;
-				}
-			}
-		}
-		return false;
-	}
+//	public boolean heart(int nextx, int nexty) {
+//		Rectangle player = new Rectangle(nextx + maskx, nexty + masky, maskw, maskh);
+//		for(int i = 0; i < Game.heart.size(); i++) {
+//			Heart heart = Game.heart.get(i);
+//			if(heart instanceof Heart) {
+//				Rectangle solido = new Rectangle(heart.getX() + maskx, heart.getY() + masky, maskw,maskh);
+//				if(player.intersects(solido)) {
+//					if(life < 100) {
+//						Game.heart.remove(heart);
+//						life +=5;
+//					}
+//					return true;
+//				}
+//			}
+//		}
+//		return false;
+//	}
 	
 	public boolean npc(int nextx, int nexty) {
 		Rectangle player = new Rectangle(nextx + maskx, nexty + masky, maskw, maskh);

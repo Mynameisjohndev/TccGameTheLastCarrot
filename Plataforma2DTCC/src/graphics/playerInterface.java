@@ -30,7 +30,8 @@ public class playerInterface {
 		g.drawImage(Entity.hud,5,2, null);
 		g.setColor(Color.white);	
 		g.setFont(new Font("arial",Font.BOLD,8));
-		g.drawString("" + Game.player.itemLife, 123, 32);
+		g.drawString("" + Game.player.itemLife, 123,32);
+		g.drawString("" + Game.player.itemCarrot, 75, 32);
 	}
 	
 }

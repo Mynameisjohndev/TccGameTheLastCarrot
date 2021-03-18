@@ -42,6 +42,7 @@ public class Player extends Entity {
 	public static int itemCarrot = 0;
 	
 	public static int missao = 0;
+	public static boolean missaoCompleta = false;
 	public  String[] missoes = {"Colete um total de 5 corações e 5 cenouras","CARREGAR JOGO","SAIR"};
 	
 	
@@ -61,8 +62,8 @@ public class Player extends Entity {
 
 	public void tick() {
 		
-		if(missao == 1) {
-			System.out.println("Nova missao");
+		if(missao == 1 && itemLife == 5 && itemCarrot == 5 ) {
+			missaoCompleta = true;
 		}
 		
 		movimentacao = 0;

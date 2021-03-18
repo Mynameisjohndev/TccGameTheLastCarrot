@@ -62,7 +62,7 @@ public class Player extends Entity {
 	public void tick() {
 		
 		if(missao == 1) {
-			System.out.println("Barcelona");
+			System.out.println("Nova missao");
 		}
 		
 		movimentacao = 0;

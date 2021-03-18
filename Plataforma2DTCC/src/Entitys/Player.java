@@ -3,6 +3,7 @@ package Entitys;
 import java.awt.Graphics;
 import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
+import java.util.List;
 
 import Main.Game;
 import World.Camera;
@@ -40,6 +41,10 @@ public class Player extends Entity {
 	public static int itemLife = 0;
 	public static int itemCarrot = 0;
 	
+	public static int missao = 0;
+	public  String[] missoes = {"Colete um total de 5 corações e 5 cenouras","CARREGAR JOGO","SAIR"};
+	
+	
 	public Player(int x, int y, int Width, int Height, BufferedImage sprite) {
 		super(x, y, Width, Height, sprite);
 		rightplayer = new BufferedImage[4];
@@ -55,6 +60,11 @@ public class Player extends Entity {
 	}
 
 	public void tick() {
+		
+		if(missao == 1) {
+			System.out.println("Barcelona");
+		}
+		
 		movimentacao = 0;
 		
 		if(!coliding((int)x, (int)(y+1)) && isJump == false) {

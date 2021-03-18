@@ -92,13 +92,16 @@ public class NPC1  extends Entity{
 		
 		if(coliding(this.getX(), this.getY()) && chat == true && currentOption < maxOption) {
 			Game.player.chat = true;
-			
 			g.setColor(new Color(0,0,0,100));
 			g.fillRect(10, 71, Game.WIDTH-20, 58);
 			
 			g.setFont(new Font("Arial", Font.BOLD, 9));
 			g.setColor(Color.black);
-			g.drawString(frases[currentOption], 15,80);		 	
+			g.drawString(frases[currentOption], 15,80);		
+			if(currentOption == 1 && Game.player.missao == 0) {
+				Game.player.missao = 1;
+				System.out.println("new mission");
+			}
 		}else {
 			Game.player.chat = false;
 		}

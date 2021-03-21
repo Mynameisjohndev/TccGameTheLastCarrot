@@ -3,8 +3,6 @@ package Entitys;
 import java.awt.Graphics;
 import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
-import java.util.List;
-
 import Main.Game;
 import World.Camera;
 
@@ -45,11 +43,19 @@ public class Player extends Entity {
 	public static boolean missaoCompleta = false;
 	public  String[] missoes = {"Colete um total de 5 corações e 5 cenouras","CARREGAR JOGO","SAIR"};
 	
+	public static boolean atack = false;
+	private BufferedImage rightplayeratack[];
+	private BufferedImage leftplayeratack[];
+	public int framesa = 0, maxFramesa = 4, indexa = 0, maxIndexa = 3;
+	public int atacando = 0;
+	public boolean atackRight, atackLeft;
 	
 	public Player(int x, int y, int Width, int Height, BufferedImage sprite) {
 		super(x, y, Width, Height, sprite);
 		rightplayer = new BufferedImage[4];
 		leftplayer = new BufferedImage[4];
+		rightplayeratack = new BufferedImage[4];
+		leftplayeratack = new BufferedImage[4];
 		
 		for (int i = 0; i < 4; i++) {
 		rightplayer[i] = Game.spritsheet.getSprite(0 + (16*i), 0, 16, 16);
@@ -58,12 +64,41 @@ public class Player extends Entity {
 		for (int i = 0; i < 4; i++) {
 		leftplayer[i] = Game.spritsheet.getSprite(48 - (16*i), 16, 16, 16);
 		}		
+		
+		for (int i = 0; i < 4; i++) {
+		rightplayeratack[i] = Game.spritsheet.getSprite(96 + (16*i), 0, 16, 16);
+		}
+			
+		for (int i = 0; i < 4; i++) {
+		leftplayeratack[i] = Game.spritsheet.getSprite(96 + (16*i), 16, 16, 16);
+		}
+		
 	}
 
 	public void tick() {
 		
+		if(atack == true) {
+			atacando = 1;
+		}
+		
+		if(atacando == 1) {
+			framesa++;
+			if(framesa == 4) {
+				framesa = 0;
+				indexa++;
+				if(indexa == 3)
+				    atacando = 0;
+					atack = false;
+					framesa = 0;
+			}
+			if(indexa == 3)
+			indexa = 0;
+			atack = false;
+		}
+		
+		//MISSAO
 		if(missao == 1 && itemLife == 5 && itemCarrot == 5 ) {
-			missaoCompleta = true;
+			System.out.println("Missão completada");
 		}
 		
 		movimentacao = 0;
@@ -250,6 +285,16 @@ public class Player extends Entity {
 	}
 	
 	public void render(Graphics g) {
+		
+		if(atacando == 1 && direcaoAtual == direita) {
+		movimentacao = 2;
+		g.drawImage(this.rightplayeratack[indexa], this.getX()- Camera.x, this.getY()-Camera.y, null);	
+		}
+			
+		if(atacando == 1 && direcaoAtual == esquerda) {
+		movimentacao = 2;
+		g.drawImage(this.leftplayeratack[indexa], this.getX()- Camera.x, this.getY()-Camera.y, null);	
+		}
 		
 		if(direcaoAtual == direita && movimentacao == 1) {
 			//g.setColor(Color.red);

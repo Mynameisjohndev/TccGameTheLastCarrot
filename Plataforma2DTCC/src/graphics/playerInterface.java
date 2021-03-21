@@ -32,6 +32,11 @@ public class playerInterface {
 		g.setFont(new Font("arial",Font.BOLD,8));
 		g.drawString("" + Game.player.itemLife, 123,32);
 		g.drawString("" + Game.player.itemCarrot, 75, 32);
+		
+	
+		
+		
+		
 	}
 	
 }

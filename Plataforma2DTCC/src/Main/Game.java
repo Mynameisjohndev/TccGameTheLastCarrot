@@ -345,6 +345,11 @@ public class Game extends Canvas implements Runnable, KeyListener{
 	@Override
 	public void keyReleased(KeyEvent e) {
 	
+		//ATACK
+		if(e.getKeyCode() == KeyEvent.VK_F) {
+			Player.atack = true;
+	    }	
+		
 		//MOVIMENTAÇÃO
 		if(e.getKeyCode() == KeyEvent.VK_D) {
 			player.right = false;

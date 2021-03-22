@@ -10,7 +10,7 @@ import World.Camera;
 public class AtaqueRight extends Entity {
 
 	public static BufferedImage ataqueS = Game.spritsheet.getSprite(32, 80, 16, 16);
-	public double life = 0, maxlife = 1;
+	public double life = 0, maxlife = 2;
 	public double speed = 1.05;
 	
 	public AtaqueRight(int x, int y, int width, int height, BufferedImage sprite) {
@@ -19,7 +19,7 @@ public class AtaqueRight extends Entity {
 
 
 	public void tick() {
-		x-=speed;
+		x+=speed;
 		
 		if(this.getX() < Game.player.getX()) {
 			//x+=Game.player.speed;

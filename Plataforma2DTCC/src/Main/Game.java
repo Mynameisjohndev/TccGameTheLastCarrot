@@ -15,6 +15,8 @@ import java.util.List;
 
 import javax.swing.JFrame;
 
+import Entitys.AtaqueLeft;
+import Entitys.AtaqueRight;
 import Entitys.Carrot;
 import Entitys.Entity;
 import Entitys.Goblin;
@@ -66,6 +68,10 @@ public class Game extends Canvas implements Runnable, KeyListener{
 	public static Spritsheet hud;
 	public static List<NPC1> npc1;
 	public static NPC1 ncpteste;
+	
+	public static List<AtaqueLeft> ataques;
+	public static List<AtaqueRight> ataquesr;
+	
 	public Game() {
 		addKeyListener(this);
 		this.setPreferredSize(new Dimension(WIDTH*SCALE, HEIGHT*SCALE));
@@ -81,6 +87,8 @@ public class Game extends Canvas implements Runnable, KeyListener{
 		heart = new ArrayList<Heart>();
 		goblin = new ArrayList<Goblin>();
 		npc1 = new ArrayList<NPC1>();
+		ataques = new ArrayList<AtaqueLeft>();
+		ataquesr = new ArrayList<AtaqueRight>();
 		player = new Player(0,0,16,16,spritsheet.getSprite(0,0,16,16));
 		entidades.add(player);
 		world = new Level("/level1.png");
@@ -165,6 +173,16 @@ public class Game extends Canvas implements Runnable, KeyListener{
 				Sky skyE = sky.get(i);
 				skyE.tick();
 			}
+			
+			for(int i =0; i < ataques.size(); i++) {
+				AtaqueLeft a = ataques.get(i);
+				a.tick();
+			}
+			
+			for(int i =0; i < ataquesr.size(); i++) {
+				AtaqueRight a = ataquesr.get(i);
+				a.tick();
+			}
 		
 			}else if(gameState == "gameOver"){
 				messageGameOverFrames++;
@@ -234,6 +252,16 @@ public class Game extends Canvas implements Runnable, KeyListener{
 		for(int i =0; i < carrot.size(); i++) {
 			Carrot c = carrot.get(i);
 			c.render(g);
+		}
+		
+		for(int i =0; i < ataques.size(); i++) {
+			AtaqueLeft a = ataques.get(i);
+			a.render(g);
+		}
+		
+		for(int i =0; i < ataquesr.size(); i++) {
+			AtaqueRight a = ataquesr.get(i);
+			a.render(g);
 		}
 		
 		lifeBar.render(g);

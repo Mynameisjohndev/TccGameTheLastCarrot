@@ -13,8 +13,8 @@ public class Goblin extends Entity {
 	public int movimentacao = 0;
 	public int frames = 0, maxFrames = 5, index = 0, maxIndex = 3;
 	private int maskx = 0, masky = 0, maskw = 15, maskh = 16;
-	
-	public int life = 3;
+	private int maskxi =0, maskyi = 0, maskWi = 16, maskHi = 16;
+	public double life = 10;
 	
 	public Goblin(int x, int y, int Width, int Height, BufferedImage sprite) {
 		super(x, y, Width, Height, sprite);
@@ -22,6 +22,9 @@ public class Goblin extends Entity {
 
 	
 	public void tick() {
+		
+		
+		
 		
 		if(!coliding((int)x, (int)(y+1))) {
 			y+=2;
@@ -39,6 +42,7 @@ public class Goblin extends Entity {
 	public void render() {
 		
 	}
+	
 	
 	public boolean coliding(int nextx, int nexty) {
 		Rectangle goblin = new Rectangle(nextx + maskx, nexty + masky, maskw, maskh);

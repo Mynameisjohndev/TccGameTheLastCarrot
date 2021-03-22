@@ -3,6 +3,7 @@ package Entitys;
 import java.awt.Graphics;
 import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
+
 import Main.Game;
 import World.Camera;
 
@@ -95,6 +96,22 @@ public class Player extends Entity {
 			indexa = 0;
 			atack = false;
 		}
+		
+		//CODIGO PARA INSTANCIAR UM NOVO OBJETO DE ATAQUE
+				//ataque left
+		if(indexa == 2 && Game.ataques.size() == 0 && Game.ataquesr.size() == 0) {
+			if(direcaoAtual == esquerda){
+			AtaqueLeft novo = new AtaqueLeft(this.getX(),this.getY(),16,16,null);
+			Game.ataques.add(novo);
+			}
+		}
+				//right
+		if(indexa == 2 && Game.ataquesr.size() == 0 && Game.ataques.size() == 0) {
+			if(direcaoAtual == direita) {
+			AtaqueRight novo = new AtaqueRight(this.getX(),this.getY(),16,16,null);
+			Game.ataquesr.add(novo);
+			}
+		 }
 		
 		//MISSAO
 		if(missao == 1 && itemLife == 5 && itemCarrot == 5 ) {

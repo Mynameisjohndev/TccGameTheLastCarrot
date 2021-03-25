@@ -7,6 +7,8 @@ import java.util.ArrayList;
 
 import javax.imageio.ImageIO;
 
+import Entitys.AtaqueLeft;
+import Entitys.AtaqueRight;
 import Entitys.Carrot;
 import Entitys.Entity;
 import Entitys.Goblin;
@@ -99,15 +101,18 @@ public class Level {
 	}
 	
 	public static void newLevel(String level) {
+		
 		Game.entidades = new ArrayList<Entity>();
 		Game.spritsheet = new Spritsheet("/spriteSheet.png");
 		Game.sky = new ArrayList<Sky>();
 		Game.skySprite = new Spritsheet("/ceusprite.png");
-		
+		Game.hud = new Spritsheet("/hud.png");
 		Game.carrot = new ArrayList<Carrot>();
 		Game.heart = new ArrayList<Heart>();
 		Game.goblin = new ArrayList<Goblin>();
-		
+		Game.npc1 = new ArrayList<NPC1>();
+		Game.ataques = new ArrayList<AtaqueLeft>();
+		Game.ataquesr = new ArrayList<AtaqueRight>();
 		Game.player = new Player(0,0,16,16,Game.spritsheet.getSprite(0,0,16,16));
 		Game.entidades.add(Game.player);
 		Game.world = new Level("/"+level);

@@ -9,6 +9,7 @@ import javax.imageio.ImageIO;
 
 import Entitys.AtaqueLeft;
 import Entitys.AtaqueRight;
+import Entitys.Background;
 import Entitys.Carrot;
 import Entitys.Entity;
 import Entitys.Goblin;
@@ -69,7 +70,12 @@ public class Level {
 						//CEU
 						Sky ceu = new Sky(x*16,y*16,16,16,Entity.sky);
 						Game.sky.add(ceu);
-						ceu.setX(-50);
+						ceu.setX(-20);
+					}else if(pixelAtual == 0xFFff4040) {
+						//BACKGROUND2
+						Background background = new Background(x*16,y*16,16,16,Entity.background);
+						Game.backgroundF.add(background);
+						background.setX(-16);
 					}else if(pixelAtual == 0xFF0c7389) {
 						NPC1 npc = new NPC1(x*16,y*16,16,16,Entity.NPC1);
 						Game.npc1.add(npc);

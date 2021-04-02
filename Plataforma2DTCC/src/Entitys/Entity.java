@@ -12,8 +12,8 @@ public class Entity {
 	private int maskx = 0, masky = 0, maskw = 16, maskh = 16;
 	 
 	
-	public static BufferedImage chao = Game.spritsheet.getSprite(0, 112, 16, 16);
-	public static BufferedImage chaoGrama = Game.spritsheet.getSprite(16, 112, 16, 16);
+	public static BufferedImage chao = Game.spritsheet.getSprite(0, 144, 16, 16);
+	public static BufferedImage chaoGrama = Game.spritsheet.getSprite(16, 144, 16, 16);
 	public static BufferedImage grass = Game.spritsheet.getSprite(0, 128, 16, 16);
 	public static BufferedImage empty =  Game.spritsheet.getSprite(32, 144, 16, 16);	
 	public static BufferedImage goblin = Game.spritsheet.getSprite(144, 144, 16, 16);
@@ -25,7 +25,7 @@ public class Entity {
 	///sprites diferntes
 	public static BufferedImage hud = Game.hud.getSprite(0, 0, 130, 32);
 	public static BufferedImage sky =  Game.skySprite.getSprite(0, 0, 2080, 520);
-	
+	public static BufferedImage background =  Game.backgroundSprite.getSprite(0, 0, 2080, 320);
 	
 	protected double x;
 	protected double y;

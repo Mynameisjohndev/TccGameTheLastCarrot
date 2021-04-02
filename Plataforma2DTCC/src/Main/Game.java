@@ -17,6 +17,7 @@ import javax.swing.JFrame;
 
 import Entitys.AtaqueLeft;
 import Entitys.AtaqueRight;
+import Entitys.Background;
 import Entitys.Carrot;
 import Entitys.Entity;
 import Entitys.Goblin;
@@ -45,8 +46,13 @@ public class Game extends Canvas implements Runnable, KeyListener{
 	public static Spritsheet spritsheet;
 	public static Player player;
 	public static Level world;
+	
+	//PARALAX
 	public static List<Sky> sky;
 	public static Spritsheet skySprite;
+	
+	public static List<Background> backgroundF;
+	public static Spritsheet backgroundSprite;
 	
 	public static List<Carrot> carrot;
 	public static List<Heart> heart;
@@ -80,8 +86,12 @@ public class Game extends Canvas implements Runnable, KeyListener{
 		background = new BufferedImage(WIDTH, HEIGHT, BufferedImage.TYPE_INT_RGB);
 		entidades = new ArrayList<Entity>();
 		spritsheet = new Spritsheet("/spriteSheet.png");
+		//PARALAX
 		sky = new ArrayList<Sky>();
 		skySprite = new Spritsheet("/ceusprite.png");
+		backgroundF = new ArrayList<Background>();
+		backgroundSprite = new Spritsheet("/background.png");
+		
 		hud = new Spritsheet("/hud.png");
 		carrot = new ArrayList<Carrot>();
 		heart = new ArrayList<Heart>();
@@ -174,6 +184,12 @@ public class Game extends Canvas implements Runnable, KeyListener{
 				skyE.tick();
 			}
 			
+			for(int i =0; i < backgroundF.size(); i++) {
+				Background backgroundE = backgroundF.get(i);
+				backgroundE.tick();
+			}
+			
+			
 			for(int i =0; i < ataques.size(); i++) {
 				AtaqueLeft a = ataques.get(i);
 				a.tick();
@@ -224,7 +240,10 @@ public class Game extends Canvas implements Runnable, KeyListener{
 			skyE.render(g);
 		}
 		
-
+		for(int i =0; i < backgroundF.size(); i++) {
+			Background backgroundE = backgroundF.get(i);
+			backgroundE.render(g);
+		}
 		
 		for(int i =0; i < entidades.size(); i++) {
 			Entity entidade = entidades.get(i);

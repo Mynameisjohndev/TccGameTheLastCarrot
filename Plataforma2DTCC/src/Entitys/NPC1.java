@@ -40,6 +40,10 @@ public class NPC1  extends Entity{
 	
 	public void tick() {
 		
+		if(!colidingSolido((int)x, (int)(y+1))) {
+			y+=2;
+		}
+		
 		if(enter) {
 			enter = false;
 			currentOption++;
@@ -67,6 +71,20 @@ public class NPC1  extends Entity{
 			currentOption = 0;
 		}
 		
+	}
+	
+	public boolean colidingSolido(int nextx, int nexty) {
+		Rectangle player = new Rectangle(nextx + maskx, nexty + masky, maskw, maskh);
+		for(int i = 0; i < Game.entidades.size(); i++) {
+			Entity entidade = Game.entidades.get(i);
+			if(entidade instanceof Solido) {
+				Rectangle solido = new Rectangle(entidade.getX() + maskx, entidade.getY() + masky, maskw,maskh);
+				if(player.intersects(solido)) {
+					return true;
+				}
+			}
+		}
+		return false;
 	}
 	
 	public boolean coliding(int nextx, int nexty) {

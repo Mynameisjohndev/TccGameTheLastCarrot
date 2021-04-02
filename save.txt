@@ -1,2 +1,2 @@
 level:;
-life:;::
+life:B:

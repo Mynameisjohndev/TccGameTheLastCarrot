@@ -24,7 +24,7 @@ public class Entity {
 	
 	///sprites diferntes
 	public static BufferedImage hud = Game.hud.getSprite(0, 0, 130, 32);
-	public static BufferedImage sky =  Game.skySprite.getSprite(0, 0, 1471, 400);
+	public static BufferedImage sky =  Game.skySprite.getSprite(0, 0, 2080, 520);
 	
 	
 	protected double x;

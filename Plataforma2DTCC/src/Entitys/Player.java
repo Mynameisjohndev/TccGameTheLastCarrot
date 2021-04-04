@@ -6,6 +6,7 @@ import java.awt.image.BufferedImage;
 
 import Main.Game;
 import World.Camera;
+import World.Level;
 
 public class Player extends Entity {
 
@@ -146,14 +147,14 @@ public class Player extends Entity {
 		if(coliding((int)(x-speed), this.getY())) {
 			ceuleft = false;	
 		}	
-		if(right && !coliding((int)(x+speed), this.getY())) {
+		if(right && !coliding((int)(x+speed), this.getY()) && this.getX() <= (Level.WIDTH*16)-16) {
 			x+=speed;
 			movimentacao = 1;
 			direcaoAtual = direita;
 			ceuright = true;
 		}
 		
-		if(left && !coliding((int)(x-speed), this.getY())) {
+		if(left && !coliding((int)(x-speed), this.getY()) && this.getX() >= 1) {
 			x-=speed;
 			movimentacao = 1;
 			direcaoAtual = esquerda;

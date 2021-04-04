@@ -1,9 +1,11 @@
 package Entitys;
 
+import java.awt.Graphics;
 import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
 
 import Main.Game;
+import World.Camera;
 
 public class Goblin extends Entity {
 
@@ -11,17 +13,34 @@ public class Goblin extends Entity {
 	public int direita = 1, esquerda = 0;
 	public int direcaoAtual = direita;
 	public int movimentacao = 0;
-	public int frames = 0, maxFrames = 5, index = 0, maxIndex = 3;
+	public int frames = 0, maxFrames = 9, index = 0, maxIndex = 3;
 	private int maskx = 0, masky = 0, maskw = 15, maskh = 16;
 	private int maskxi =0, maskyi = 0, maskWi = 16, maskHi = 16;
 	public double life = 10;
+	private BufferedImage goblinSprites[];
 	
 	public Goblin(int x, int y, int Width, int Height, BufferedImage sprite) {
 		super(x, y, Width, Height, sprite);
+		goblinSprites = new BufferedImage[4];
+		
+		for (int i = 0; i < 4; i++) {
+			goblinSprites[i] = Game.spritsheet.getSprite(144 - (16*i), 144, 16, 16);
+		}
 	}
 
 	
 	public void tick() {
+		
+		
+		if(movimentacao == 1) {
+			frames++;
+			if(frames == maxFrames) {
+				frames = 0;
+				index++;
+				if(index > maxIndex)
+					index = 0;
+			}
+		}
 		
 		if (life <= 0) {
 			Game.goblin.remove(this);
@@ -54,15 +73,19 @@ public class Goblin extends Entity {
 		
 		if(Game.player.getX() < this.getX() && !coliding((int)(x-speed), this.getY())) {
 			x-=speed;
-		}
-		
-		if(Game.player.getX() > this.getX() && !coliding((int)(x+speed), this.getY())) {
+			movimentacao = 1;
+		}else if(Game.player.getX() > this.getX() && !coliding((int)(x+speed), this.getY())) {
 			x+=speed;
+			movimentacao = 1;
+		}else {
+			movimentacao = 0;
 		}
 	}
 	
-	public void render() {
-		
+	public void render(Graphics g) {
+		if(movimentacao == 1) {
+		}
+		g.drawImage(goblinSprites[index], this.getX()-Camera.x, this.getY()-Camera.y, null);
 	}
 	
 	public boolean colisaoataquer(int nextX, int nextY) {

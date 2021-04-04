@@ -154,7 +154,7 @@ public class Player extends Entity {
 			ceuright = true;
 		}
 		
-		if(left && !coliding((int)(x-speed), this.getY()) && this.getX() >= 1) {
+		if(left && !coliding((int)(x-speed), this.getY()) && this.getX() >= 0) {
 			x-=speed;
 			movimentacao = 1;
 			direcaoAtual = esquerda;

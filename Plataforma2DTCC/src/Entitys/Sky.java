@@ -19,7 +19,7 @@ public class Sky extends Entity{
 		}
 		
 		if(Game.player.left && Game.player.ceuleft == true && Game.player.chat == false
-				&& Game.player.getX() >= 1) {
+				&& Game.player.getX() >= 0) {
 			x+=Game.player.speed - 0.75;	
 		}
 		

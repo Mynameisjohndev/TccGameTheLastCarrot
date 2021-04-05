@@ -194,7 +194,7 @@ public class Player extends Entity {
 					vspd = -3.4;
 					jump = false;
 				}else {
-					vspd = -2.5;
+					vspd = -2.7;
 					jump = false;
 				}
 			}
@@ -210,16 +210,29 @@ public class Player extends Entity {
 		}
 			while(!coliding((int)x,(int)(y+signVsp)) && jump == false ) {
 				y = y+signVsp;
-//				if(damage(this.getX(), this.getY()+16)) {
-//					jump = true;
-//				}
 		}
 			vspd = 0;
 		}
 			y = y + vspd;			
 		
-		if(damage(this.getX(), this.getY()-1)) {
-			vspd = -3.4;	
+		if(!coliding(this.getX(), this.getY()+1)) {
+			if(damage(this.getX(), this.getY()-1)) {				
+				for(int i =0; i< Game.goblin.size(); i++) {
+					Goblin e = Game.goblin.get(i);
+					if(e instanceof Goblin) {
+						if(damage(this.getX(), this.getY())) {
+							vspd = -3.5;
+							
+							goblinAtual.life--;
+							if(goblinAtual.life == 0) {
+								Game.goblin.remove(goblinAtual);
+								break;
+							}
+						}
+					}
+					break;
+				}
+			}
 		}
 			
 		

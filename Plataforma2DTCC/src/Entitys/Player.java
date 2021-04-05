@@ -48,9 +48,13 @@ public class Player extends Entity {
 	public static boolean atack = false;
 	private BufferedImage rightplayeratack[];
 	private BufferedImage leftplayeratack[];
-	public int framesa = 0, maxFramesa = 4, indexa = 0, maxIndexa = 3;
+	
+	public int framesa = 0, maxFramesa = 15, indexa = 0, maxIndexa = 3;
 	public int atacando = 0;
 	public boolean atackRight, atackLeft;
+	
+	private double gravity = 0.3;
+	private double vspd = -0.2;
 	
 	public Player(int x, int y, int Width, int Height, BufferedImage sprite) {
 		super(x, y, Width, Height, sprite);
@@ -72,12 +76,152 @@ public class Player extends Entity {
 		}
 			
 		for (int i = 0; i < 4; i++) {
-		leftplayeratack[i] = Game.spritsheet.getSprite(96 + (16*i), 16, 16, 16);
+		leftplayeratack[i] = Game.spritsheet.getSprite(144 - (16*i), 16, 16, 16);
 		}
 		
 	}
 
 	public void tick() {
+		
+//		vspd+=gravity;
+//		if(coliding((int)x,(int)(y+vspd)) && jump)
+//		{
+//			vspd = -3;
+//			jump = false;
+//		}
+//		
+//		if(this.getY() % 2 == 1) {
+//			y = y - 1;
+//		}
+//		
+//		if(!coliding((int)x,(int)(y+vspd)) && isJump == false) {
+//			y += vspd;
+//			for(int i =0; i< Game.goblin.size(); i++) {
+//				Goblin e = Game.goblin.get(i);
+//				if(e instanceof Goblin) {
+//					if(damage(this.getX(), this.getY())) {
+//						isJump = true;
+//						goblinAtual.life--;
+//						if(goblinAtual.life == 0) {
+//							Game.goblin.remove(goblinAtual);
+//							break;
+//						}
+//					}
+//				}
+//				break;
+//			}
+//		}else {
+//			vspd = -0.25;
+//		}
+//		if(jump && quantidadeDePulos >= 0 && quantidadeDePulos <=1) {
+//			isJump = true;
+//		}
+//		if(isJump) {
+//			   if(!coliding(this.getX(), this.getY()-2)) {
+//				   y-=2;
+//				   jumpFrames+=2;
+//				   //Jump animation sao as particulas que saem do personagem no pulo}
+//				   if(jumpFrames == jumpHeigth) {
+//					   //gravidade+=1;
+//					   isJump = false;
+//					   jump = false;
+//					   jumpFrames = 0;
+//				   }
+//			   }else {
+//				   isJump = false;
+//				   jump = false;
+//				   jumpFrames = 0;  
+//			   }
+//		   }
+		
+
+//PRIMEIRO SISTEMA DE PULOS E PULOS DUPLOS		
+//		if(quantidadeDePulos >= 0 && quantidadeDePulos <=1 && chat == false) { 
+//		if(jump) {
+//		   	if(coliding(this.getX(), this.getY()+1) || !coliding(this.getX(), this.getY()+1)) {
+//			  
+//			   isJump = true;
+//		   	}
+//	    }
+//	}
+//	
+//	if(isJump) {
+//		   if(!coliding(this.getX(), this.getY()-2)) {
+//			   y-=2;
+//			   jumpFrames+=2;
+//			   //Jump animation sao as particulas que saem do personagem no pulo}
+//			   if(jumpFrames == jumpHeigth) {
+//				   //gravidade+=1;
+//				   isJump = false;
+//				   jump = false;
+//				   jumpFrames = 0;
+//			   }
+//		   }else {
+//			   isJump = false;
+//			   jump = false;
+//			   jumpFrames = 0;  
+//		   }
+//	   }		
+		
+//PRIMEIRO SISTEMA DE GRAVIDADE		
+//		if(!coliding((int)x, (int)(y+1)) && isJump == false) {
+//			y+=2;
+//			for(int i =0; i< Game.goblin.size(); i++) {
+//				Goblin e = Game.goblin.get(i);
+//				if(e instanceof Goblin) {
+//					if(damage(this.getX(), this.getY())) {
+//						isJump = true;
+//						goblinAtual.life--;
+//						if(goblinAtual.life == 0) {
+//							Game.goblin.remove(goblinAtual);
+//							break;
+//						}
+//					}
+//				}
+//				break;
+//			}
+//			
+//		}
+		
+		
+		//Terceiro sistema de gravidad e pulos
+		vspd+=gravity;
+		
+		if(quantidadeDePulos >= 0 && quantidadeDePulos <=1 && jump ) {			
+			if(coliding((int)x,(int)(y+1)) || !coliding((int)x,(int)(y+vspd)))
+			{
+				if(quantidadeDePulos == 0) {
+					vspd = -3.4;
+					jump = false;
+				}else {
+					vspd = -2.5;
+					jump = false;
+				}
+			}
+		}
+			
+						
+		if(coliding((int)x,(int)(y+vspd))) {
+			int signVsp = 0;
+		if(vspd >= 0){
+			signVsp = 1;
+		}else  {
+			signVsp = -1;
+		}
+			while(!coliding((int)x,(int)(y+signVsp)) && jump == false ) {
+				y = y+signVsp;
+//				if(damage(this.getX(), this.getY()+16)) {
+//					jump = true;
+//				}
+		}
+			vspd = 0;
+		}
+			y = y + vspd;			
+		
+		if(damage(this.getX(), this.getY()-1)) {
+			vspd = -3.4;	
+		}
+			
 		
 		if(atack == true) {
 			atacando = 1;
@@ -120,25 +264,6 @@ public class Player extends Entity {
 		}
 		
 		movimentacao = 0;
-		
-		if(!coliding((int)x, (int)(y+1)) && isJump == false) {
-			y+=2;
-			for(int i =0; i< Game.goblin.size(); i++) {
-				Goblin e = Game.goblin.get(i);
-				if(e instanceof Goblin) {
-					if(damage(this.getX(), this.getY())) {
-						isJump = true;
-						goblinAtual.life--;
-						if(goblinAtual.life == 0) {
-							Game.goblin.remove(goblinAtual);
-							break;
-						}
-					}
-				}
-				break;
-			}
-			
-		}
 
 		if(chat == false) {
 		if(coliding((int)(x+speed), this.getY())) {
@@ -153,48 +278,19 @@ public class Player extends Entity {
 			direcaoAtual = direita;
 			ceuright = true;
 		}
-		
 		if(left && !coliding((int)(x-speed), this.getY()) && this.getX() >= 0) {
 			x-=speed;
 			movimentacao = 1;
 			direcaoAtual = esquerda;
 			ceuleft = true;
 		}
-		
 		}
-		if(quantidadeDePulos >= 0 && quantidadeDePulos <=1 && chat == false) { 
-			if(jump) {
-			   	if(coliding(this.getX(), this.getY()+1) || !coliding(this.getX(), this.getY()+1)) {
-				  
-				   isJump = true;
-			   	}
-		    }
-		}
-		
-		if(isJump) {
-			   if(!coliding(this.getX(), this.getY()-2)) {
-				   y-=2;
-				   jumpFrames+=2;
-				   //Jump animation sao as particulas que saem do personagem no pulo}
-				   if(jumpFrames == jumpHeigth) {
-					   //gravidade+=1;
-					   isJump = false;
-					   jump = false;
-					   jumpFrames = 0;
-				   }
-			   }else {
-				   isJump = false;
-				   jump = false;
-				   jumpFrames = 0;  
-			   }
-		   }
-		
-		
+
 		
 		if(coliding(this.getX(), this.getY()+1)) {
 			   quantidadeDePulos = 0;
 		}
-		
+	
 		if(movimentacao == 1) {
 			frames++;
 			if(frames == maxFrames) {
@@ -206,7 +302,7 @@ public class Player extends Entity {
 		}
 		
 		if(damage(this.getX(), this.getY())) {
-			life-=0.75;
+			life-=0.20;
 		}
 		if(life <= 0) {;
 			Game.gameState = "gameOver";

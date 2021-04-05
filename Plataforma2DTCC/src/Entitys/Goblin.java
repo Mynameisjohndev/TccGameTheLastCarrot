@@ -18,6 +18,7 @@ public class Goblin extends Entity {
 	private int maskxi =0, maskyi = 0, maskWi = 16, maskHi = 16;
 	public double life = 10;
 	private BufferedImage goblinSprites[];
+	public int val = 0;
 	
 	public Goblin(int x, int y, int Width, int Height, BufferedImage sprite) {
 		super(x, y, Width, Height, sprite);
@@ -31,6 +32,11 @@ public class Goblin extends Entity {
 	
 	public void tick() {
 		
+//		val ++;
+//		if(val == 40) {
+//			y-=12;
+//			val = 0;
+//		}
 		
 		if(movimentacao == 1) {
 			frames++;

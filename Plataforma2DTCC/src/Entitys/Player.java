@@ -53,8 +53,8 @@ public class Player extends Entity {
 	public int atacando = 0;
 	public boolean atackRight, atackLeft;
 	
-	private double gravity = 0.3;
-	private double vspd = -0.2;
+	private double gravity = 0.2;
+	private double vspd = 0.60;
 	
 	public Player(int x, int y, int Width, int Height, BufferedImage sprite) {
 		super(x, y, Width, Height, sprite);
@@ -191,10 +191,10 @@ public class Player extends Entity {
 			if(coliding((int)x,(int)(y+1)) || !coliding((int)x,(int)(y+vspd)))
 			{
 				if(quantidadeDePulos == 0) {
-					vspd = -3.4;
+					vspd = -3;
 					jump = false;
 				}else {
-					vspd = -2.7;
+					vspd = -2.2;
 					jump = false;
 				}
 			}
@@ -221,7 +221,7 @@ public class Player extends Entity {
 					Goblin e = Game.goblin.get(i);
 					if(e instanceof Goblin) {
 						if(damage(this.getX(), this.getY())) {
-							vspd = -3.5;
+							vspd = -2.5;
 							
 							goblinAtual.life--;
 							if(goblinAtual.life == 0) {

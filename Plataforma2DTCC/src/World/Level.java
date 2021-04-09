@@ -80,6 +80,13 @@ public class Level {
 						NPC1 npc = new NPC1(x*16,y*16,16,16,Entity.NPC1);
 						Game.npc1.add(npc);
 					}
+					else if(pixelAtual == 0xFFa14611) {
+						Solido solido = new Solido(x*16,y*16,16,16,Entity.blocoMadeira);
+						Game.entidades.add(solido);
+					}else if(pixelAtual == 0xFF552101) {
+						Solido solido = new Solido(x*16,y*16,16,16,Entity.outro);
+						Game.entidades.add(solido);
+					}
 				}
 			}
 		

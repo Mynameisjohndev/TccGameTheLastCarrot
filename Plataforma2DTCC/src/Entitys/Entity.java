@@ -22,7 +22,11 @@ public class Entity {
 	public static BufferedImage NPC1 = Game.spritsheet.getSprite(80, 128, 16, 16);
 	public static BufferedImage pressc = Game.spritsheet.getSprite(96, 96, 32, 16);
 	
-	///sprites diferntes
+	//SOLIDOS
+	public static BufferedImage blocoMadeira = Game.spritsheet.getSprite(48, 112, 16, 16);
+	public static BufferedImage outro = Game.spritsheet.getSprite(64, 112, 16, 16);
+	
+	///sprites diferentes
 	public static BufferedImage hud = Game.hud.getSprite(0, 0, 130, 32);
 	public static BufferedImage sky =  Game.skySprite.getSprite(0, 0, 2080, 520);
 	public static BufferedImage background =  Game.backgroundSprite.getSprite(0, 0, 2080, 320);

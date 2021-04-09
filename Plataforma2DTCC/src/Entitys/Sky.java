@@ -3,6 +3,7 @@ package Entitys;
 import java.awt.image.BufferedImage;
 
 import Main.Game;
+import World.Camera;
 import World.Level;
 
 

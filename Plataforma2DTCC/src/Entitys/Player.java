@@ -56,6 +56,8 @@ public class Player extends Entity {
 	private double gravity = 0.2;
 	private double vspd = 0.60;
 	
+	protected int timer = 0;
+	
 	public Player(int x, int y, int Width, int Height, BufferedImage sprite) {
 		super(x, y, Width, Height, sprite);
 		rightplayer = new BufferedImage[4];
@@ -82,7 +84,6 @@ public class Player extends Entity {
 	}
 
 	public void tick() {
-		
 //		vspd+=gravity;
 //		if(coliding((int)x,(int)(y+vspd)) && jump)
 //		{
@@ -188,10 +189,10 @@ public class Player extends Entity {
 		vspd+=gravity;
 		
 		if(quantidadeDePulos >= 0 && quantidadeDePulos <=1 && jump ) {			
-			if(coliding((int)x,(int)(y+1)) || !coliding((int)x,(int)(y+vspd)))
+			if(coliding((int)x,(int)(y)) || !coliding((int)x,(int)(y)))
 			{
 				if(quantidadeDePulos == 0) {
-					vspd = -3;
+					vspd = -3.3;
 					jump = false;
 				}else {
 					vspd = -2.2;
@@ -328,6 +329,14 @@ public class Player extends Entity {
 		
 		Camera.x = Camera.clamp(this.getX() - (Game.WIDTH/2), 0, World.Level.WIDTH*16 - Game.WIDTH);
 		Camera.y = Camera.clamp(this.getY() - (Game.HEIGHT/2), 0, World.Level.HEIGHT*16 - Game.HEIGHT);
+	 
+		
+		timer++;
+		if(timer == 60) {
+			System.out.println(life);
+			timer= 0;
+		}
+		
 		
 		checkLIfe();
 		checkCarrot();
@@ -340,7 +349,7 @@ public class Player extends Entity {
 				if(Entity.isColidding(this, heart)) {
 					if(life > maxLife) {
 						life = 100;
-					}else if(life < 100) {
+					}else if(life > 0 && life < 100) {
 						life+=2;
 						Game.heart.remove(heart);
 					}else if(life == 100) {

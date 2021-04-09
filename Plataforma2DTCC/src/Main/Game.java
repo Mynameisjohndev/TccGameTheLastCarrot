@@ -350,7 +350,6 @@ public class Game extends Canvas implements Runnable, KeyListener{
 		//JUMP
 		if(e.getKeyCode() == KeyEvent.VK_SPACE) {
 		    player.jump = false;
-		    player.quantidadeDePulos+=1;
 		}
 		
 		

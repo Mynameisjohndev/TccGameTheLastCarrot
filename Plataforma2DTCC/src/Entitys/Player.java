@@ -57,6 +57,8 @@ public class Player extends Entity {
 	private double vspd = 0.60;
 	
 	protected int timer = 0;
+	protected int a = 0;
+	public Entity entidadeAtual;
 	
 	public Player(int x, int y, int Width, int Height, BufferedImage sprite) {
 		super(x, y, Width, Height, sprite);
@@ -188,19 +190,40 @@ public class Player extends Entity {
 		//Terceiro sistema de gravidad e pulos
 		vspd+=gravity;
 		
-		if(quantidadeDePulos >= 0 && quantidadeDePulos <=1 && jump ) {			
+		if(quantidadeDePulos >= 0 && quantidadeDePulos <= 1 && jump ) {			
 			if(coliding((int)x,(int)(y)) || !coliding((int)x,(int)(y)))
 			{
 				if(quantidadeDePulos == 0) {
 					vspd = -3.3;
 					jump = false;
+					quantidadeDePulos++;
 				}else {
 					vspd = -2.2;
 					jump = false;
+					quantidadeDePulos++;
 				}
 			}
 		}
+		System.out.println(quantidadeDePulos);
 			
+		if(coliding((int)x+1,(int)(y)) && jump
+		|| coliding((int)x-1,(int)(y)) && jump			
+				) {
+			quantidadeDePulos = 2;
+			
+		}
+		
+		if(quantidadeDePulos == 2 && jump && coliding((int)x+1,(int)(y))) {
+			vspd = -3.2;
+			x--;
+			jump = false;
+		}
+		if(quantidadeDePulos == 2 && jump && coliding((int)x-1,(int)(y))) {
+			vspd = -3.2;
+			x++;
+			jump = false;
+		}
+		
 						
 		if(coliding((int)x,(int)(y+vspd))) {
 			int signVsp = 0;
@@ -330,16 +353,27 @@ public class Player extends Entity {
 		Camera.x = Camera.clamp(this.getX() - (Game.WIDTH/2), 0, World.Level.WIDTH*16 - Game.WIDTH);
 		Camera.y = Camera.clamp(this.getY() - (Game.HEIGHT/2), 0, World.Level.HEIGHT*16 - Game.HEIGHT);
 	 
-		
-		timer++;
-		if(timer == 60) {
-			System.out.println(life);
-			timer= 0;
-		}
-		
-		
+	
 		checkLIfe();
 		checkCarrot();
+		
+//		if (timer == 0) {			
+//			if(coliding(this.getX(), this.getY()-1)) {	
+//				timer = 3;
+//			}
+//		}
+//		
+//		if(timer == 3) {
+//			entidadeAtual.setY(entidadeAtual.getY()-1);
+//			a++;
+//			System.out.println(a);
+//			if(a >= 10) {
+//				timer = 0;
+//				entidadeAtual.setY(entidadeAtual.getY()+1);
+//			}
+//		}	
+	
+		
 	}
 	
 	public void checkLIfe() {
@@ -381,6 +415,7 @@ public class Player extends Entity {
 			if(entidade instanceof Solido) {
 				Rectangle solido = new Rectangle(entidade.getX() + maskx, entidade.getY() + masky, maskw,maskh);
 				if(player.intersects(solido)) {
+					entidadeAtual = entidade;
 					return true;
 				}
 			}

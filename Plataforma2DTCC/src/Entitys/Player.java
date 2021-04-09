@@ -59,6 +59,9 @@ public class Player extends Entity {
 	protected int timer = 0;
 	protected int a = 0;
 	public Entity entidadeAtual;
+	protected boolean puloParede = false;
+	protected int direcaoPulo = 0;
+	
 	
 	public Player(int x, int y, int Width, int Height, BufferedImage sprite) {
 		super(x, y, Width, Height, sprite);
@@ -86,6 +89,7 @@ public class Player extends Entity {
 	}
 
 	public void tick() {
+		speed = 1;
 //		vspd+=gravity;
 //		if(coliding((int)x,(int)(y+vspd)) && jump)
 //		{
@@ -189,7 +193,7 @@ public class Player extends Entity {
 		
 		//Terceiro sistema de gravidad e pulos
 		vspd+=gravity;
-		
+		puloParede = false;
 		if(quantidadeDePulos >= 0 && quantidadeDePulos <= 1 && jump ) {			
 			if(coliding((int)x,(int)(y)) || !coliding((int)x,(int)(y)))
 			{
@@ -204,27 +208,50 @@ public class Player extends Entity {
 				}
 			}
 		}
-		System.out.println(quantidadeDePulos);
+		System.out.println(x);
 			
 		if(coliding((int)x+1,(int)(y)) && jump
 		|| coliding((int)x-1,(int)(y)) && jump			
 				) {
-			quantidadeDePulos = 2;
+			puloParede = true;
+			quantidadeDePulos = 3;
 			
 		}
 		
-		if(quantidadeDePulos == 2 && jump && coliding((int)x+1,(int)(y))) {
+		if(quantidadeDePulos == 3 && jump && coliding((int)x+1,(int)(y))) {
 			vspd = -3.2;
-			x--;
 			jump = false;
+			puloParede = true;
+			direcaoPulo = 1;
 		}
-		if(quantidadeDePulos == 2 && jump && coliding((int)x-1,(int)(y))) {
+		if(quantidadeDePulos == 3 && jump && coliding((int)x-1,(int)(y))) {
 			vspd = -3.2;
-			x++;
 			jump = false;
+			puloParede = true;
+			direcaoPulo = 2;
+		}
+		if(quantidadeDePulos == 3 && direcaoPulo == 1) {
+			direcaoAtual = esquerda;
+			speed = 0;
+			x = x + vspd+0.8;
+			timer++;
+			if(timer >= 10) {
+				quantidadeDePulos = 4;
+				timer = 0;
+			}
+		}
+		if(quantidadeDePulos == 3 && direcaoPulo == 2) {
+			direcaoAtual = direita;
+			speed = 0;
+			x = x - vspd-0.8;
+			timer++;
+			if(timer >= 10) {
+				quantidadeDePulos = 4;
+				timer = 0;
+			}
 		}
 		
-						
+		
 		if(coliding((int)x,(int)(y+vspd))) {
 			int signVsp = 0;
 		if(vspd >= 0){
@@ -310,13 +337,15 @@ public class Player extends Entity {
 			ceuleft = false;	
 		}	
 		if(right && !coliding((int)(x+speed), this.getY()) && this.getX() <= (Level.WIDTH*16)-16) {
-			x+=speed;
+			//x = x + vspd;
+			x += speed;
 			movimentacao = 1;
 			direcaoAtual = direita;
 			ceuright = true;
 		}
-		if(left && !coliding((int)(x-speed), this.getY()) && this.getX() >= 0) {
-			x-=speed;
+		if(left && !coliding((int)(x-speed), this.getY()) && this.getX() >= 0 ) {
+			//x= x - vspd;
+			x -= speed;
 			movimentacao = 1;
 			direcaoAtual = esquerda;
 			ceuleft = true;

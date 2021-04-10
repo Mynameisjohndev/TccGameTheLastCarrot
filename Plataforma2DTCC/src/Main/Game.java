@@ -79,6 +79,7 @@ public class Game extends Canvas implements Runnable, KeyListener{
 	public static List<AtaqueRight> ataquesr;
 	
 	public Game() {
+		Sounds.music.loop();
 		addKeyListener(this);
 		this.setPreferredSize(new Dimension(WIDTH*SCALE, HEIGHT*SCALE));
 		initFrame();

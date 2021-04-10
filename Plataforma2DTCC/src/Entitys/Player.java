@@ -5,6 +5,7 @@ import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
 
 import Main.Game;
+import Main.Sounds;
 import World.Camera;
 import World.Level;
 
@@ -198,17 +199,19 @@ public class Player extends Entity {
 			if(coliding((int)x,(int)(y)) || !coliding((int)x,(int)(y)))
 			{
 				if(quantidadeDePulos == 0) {
+					Sounds.jump.play();
 					vspd = -3.3;
 					jump = false;
 					quantidadeDePulos++;
 				}else {
+					Sounds.jump2.play();
 					vspd = -2.2;
 					jump = false;
 					quantidadeDePulos++;
 				}
 			}
 		}
-		System.out.println(x);
+		System.out.println(quantidadeDePulos);
 			
 		if(coliding((int)x+1,(int)(y)) && jump
 		|| coliding((int)x-1,(int)(y)) && jump			
@@ -218,13 +221,15 @@ public class Player extends Entity {
 			
 		}
 		
-		if(quantidadeDePulos == 3 && jump && coliding((int)x+1,(int)(y))) {
+		if( jump == true && coliding((int)x+1,(int)(y))) {
+			Sounds.jump.play();
 			vspd = -3.2;
 			jump = false;
 			puloParede = true;
 			direcaoPulo = 1;
 		}
-		if(quantidadeDePulos == 3 && jump && coliding((int)x-1,(int)(y))) {
+		if(jump == true && coliding((int)x-1,(int)(y))) {
+			Sounds.jump.play();
 			vspd = -3.2;
 			jump = false;
 			puloParede = true;
@@ -232,8 +237,9 @@ public class Player extends Entity {
 		}
 		if(quantidadeDePulos == 3 && direcaoPulo == 1) {
 			direcaoAtual = esquerda;
+			right = false;
 			speed = 0;
-			x = x + vspd+0.8;
+			x = x + vspd+0.3;
 			timer++;
 			if(timer >= 10) {
 				quantidadeDePulos = 4;
@@ -242,8 +248,9 @@ public class Player extends Entity {
 		}
 		if(quantidadeDePulos == 3 && direcaoPulo == 2) {
 			direcaoAtual = direita;
+			left = false;
 			speed = 0;
-			x = x - vspd-0.8;
+			x = x - vspd-0.3;
 			timer++;
 			if(timer >= 10) {
 				quantidadeDePulos = 4;
@@ -272,8 +279,8 @@ public class Player extends Entity {
 					Goblin e = Game.goblin.get(i);
 					if(e instanceof Goblin) {
 						if(damage(this.getX(), this.getY())) {
+							Sounds.jump.play();
 							vspd = -2.5;
-							
 							goblinAtual.life--;
 							if(goblinAtual.life == 0) {
 								Game.goblin.remove(goblinAtual);

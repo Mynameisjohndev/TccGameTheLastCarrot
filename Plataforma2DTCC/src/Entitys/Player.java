@@ -280,6 +280,7 @@ public class Player extends Entity {
 					if(e instanceof Goblin) {
 						if(damage(this.getX(), this.getY())) {
 							Sounds.jump.play();
+							Sounds.jump.setVolume(-20);
 							vspd = -2.5;
 							goblinAtual.life--;
 							if(goblinAtual.life == 0) {

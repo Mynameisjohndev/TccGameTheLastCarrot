@@ -7,6 +7,7 @@ import java.io.IOException;
 
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
+import javax.sound.sampled.FloatControl;
 import javax.sound.sampled.LineUnavailableException;
 import javax.sound.sampled.UnsupportedAudioFileException;
 import java.io.ByteArrayOutputStream;
@@ -21,7 +22,8 @@ public static class Clips{
 	private int p;
 	private int count;
 	
-	
+	private FloatControl gainControl;
+	private int volume;
 	
 	public Clips(byte[] buffer, int count) throws LineUnavailableException, IOException, UnsupportedAudioFileException {
 		if(buffer == null)
@@ -33,6 +35,7 @@ public static class Clips{
 		for(int i = 0; i < count; i++) {
 			clips[i] = AudioSystem.getClip();
 			clips[i].open(AudioSystem.getAudioInputStream(new ByteArrayInputStream(buffer)));
+			gainControl = (FloatControl) clips[0].getControl(FloatControl.Type.MASTER_GAIN);
 		}
 	}
 	
@@ -49,12 +52,21 @@ public static class Clips{
 		if(clips == null) return;
 		clips[p].loop(300);
 	}
+	
+	public void setVolume(int vol) {
+		if(clips == null) return;
+		if(volume != vol) {
+			volume = vol;
+			gainControl.setValue(volume);
+			
+		}
+	}
 
 }
 
 public static Clips music = load("/intro.wav",1);
-public static Clips jump2 = load("/secondtJump.wav",2);
-public static Clips jump = load("/secondtJump.wav",2);
+public static Clips jump2 = load("/secondtJump.wav",1);
+public static Clips jump = load("/secondtJump.wav",1);
 
 private static Clips load(String name,int count) {
 	try {

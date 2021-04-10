@@ -80,6 +80,9 @@ public class Game extends Canvas implements Runnable, KeyListener{
 	
 	public Game() {
 		Sounds.music.loop();
+		Sounds.jump.setVolume(-20);
+		Sounds.jump2.setVolume(-20);
+		Sounds.music.setVolume(-20);
 		addKeyListener(this);
 		this.setPreferredSize(new Dimension(WIDTH*SCALE, HEIGHT*SCALE));
 		initFrame();

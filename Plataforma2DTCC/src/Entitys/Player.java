@@ -90,8 +90,8 @@ public class Player extends Entity {
 	}
 
 	public void tick() {
-		Sounds.jump.setVolume(-20);
-		Sounds.jump2.setVolume(-20);
+		Sounds.jump.setVolume(0);
+		Sounds.jump2.setVolume(0);
 		
 		speed = 1;
 		
@@ -241,13 +241,13 @@ public class Player extends Entity {
 //				timer = 0;
 //			}
 //		}
+		puloParede = false;
 		if(coliding((int)x+1,(int)(y)) && jump
 		|| coliding((int)x-1,(int)(y)) && jump) {
-			puloParede = true;
+			//puloParede = true;
 			quantidadeDePulos = 3;
 		}
 		
-		puloParede = false;
 		if(puloParede == false) {			
 			if(quantidadeDePulos >= 0 && quantidadeDePulos <= 1 && jump) {		
 				if(coliding(this.getX(), this.getY()+1) &&

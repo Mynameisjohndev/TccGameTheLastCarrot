@@ -90,7 +90,11 @@ public class Player extends Entity {
 	}
 
 	public void tick() {
+		Sounds.jump.setVolume(-20);
+		Sounds.jump2.setVolume(-20);
+		
 		speed = 1;
+		
 //		vspd+=gravity;
 //		if(coliding((int)x,(int)(y+vspd)) && jump)
 //		{
@@ -194,70 +198,116 @@ public class Player extends Entity {
 		
 		//Terceiro sistema de gravidad e pulos
 		vspd+=gravity;
+//		if(quantidadeDePulos >= 0 ) {
+//			if(coliding((int)x-1,(int)(y)) && jump
+//			|| !coliding((int)x-1,(int)(y)) && jump) {
+//					quantidadeDePulos = 3;
+//					//puloParede = true;
+//			}		
+//		}
+//		
+//		
+//		if( jump == true && coliding((int)x+1,(int)(y))) {
+//			Sounds.jump.play();
+//			vspd = -3.2;
+//			jump = false;
+//			direcaoPulo = 1;
+//		}
+//		if(jump == true && coliding((int)x-1,(int)(y))) {
+//			Sounds.jump.play();
+//			vspd = -3.2;
+//			jump = false;
+//			direcaoPulo = 2;
+//		}
+//		if(quantidadeDePulos == 3 && direcaoPulo == 1) {
+//			direcaoAtual = esquerda;
+//			right = false;
+//			speed = 0;
+//			x = x + vspd+0.3;
+//			timer++;
+//			if(timer >= 10) {
+//				quantidadeDePulos = 4;
+//				timer = 0;
+//			}
+//		}
+//		if(quantidadeDePulos == 3 && direcaoPulo == 2) {
+//			direcaoAtual = direita;
+//			left = false;
+//			speed = 0;
+//			x = x - vspd-0.3;
+//			timer++;
+//			if(timer >= 10) {
+//				quantidadeDePulos = 4;
+//				timer = 0;
+//			}
+//		}
+		if(coliding((int)x+1,(int)(y)) && jump
+		|| coliding((int)x-1,(int)(y)) && jump) {
+			puloParede = true;
+			quantidadeDePulos = 3;
+		}
+		
 		puloParede = false;
-		if(quantidadeDePulos >= 0 && quantidadeDePulos <= 1 && jump ) {			
-			if(coliding((int)x,(int)(y)) || !coliding((int)x,(int)(y)))
-			{
-				if(quantidadeDePulos == 0) {
+		if(puloParede == false) {			
+			if(quantidadeDePulos >= 0 && quantidadeDePulos <= 1 && jump) {		
+				if(coliding(this.getX(), this.getY()+1) &&
+						quantidadeDePulos == 0) {
 					Sounds.jump.play();
 					vspd = -3.3;
 					jump = false;
 					quantidadeDePulos++;
-				}else {
+				}else if(!coliding(this.getX(), this.getY()+1)){
 					Sounds.jump2.play();
 					vspd = -2.2;
 					jump = false;
-					quantidadeDePulos++;
+					if(quantidadeDePulos == 1) {
+						quantidadeDePulos++;
+					}else {
+						quantidadeDePulos+=2;
+					}
 				}
 			}
 		}
-		System.out.println(quantidadeDePulos);
-			
-		if(coliding((int)x+1,(int)(y)) && jump
-		|| coliding((int)x-1,(int)(y)) && jump			
-				) {
-			puloParede = true;
-			quantidadeDePulos = 3;
-			
-		}
+				
+				if( jump == true && coliding((int)x+1,(int)(y))) {
+					Sounds.jump.play();
+					vspd = -3.2;
+					jump = false;
+					puloParede = true;
+					direcaoPulo = 1;
+				}
+				if(jump == true && coliding((int)x-1,(int)(y))) {
+					Sounds.jump.play();
+					vspd = -3.2;
+					jump = false;
+					puloParede = true;
+					direcaoPulo = 2;
+				}
+				if(quantidadeDePulos == 3 && direcaoPulo == 1) {
+					direcaoAtual = esquerda;
+					right = false;
+					speed = 0;
+					x = x + vspd+0.3;
+					timer++;
+					if(timer >= 10) {
+						quantidadeDePulos = 4;
+						timer = 0;
+					}
+				}
+				if(quantidadeDePulos == 3 && direcaoPulo == 2) {
+					direcaoAtual = direita;
+					left = false;
+					speed = 0;
+					x = x - vspd-0.3;
+					timer++;
+					if(timer >= 10) {
+						quantidadeDePulos = 4;
+						timer = 0;
+					}
+				}
 		
-		if( jump == true && coliding((int)x+1,(int)(y))) {
-			Sounds.jump.play();
-			vspd = -3.2;
-			jump = false;
-			puloParede = true;
-			direcaoPulo = 1;
-		}
-		if(jump == true && coliding((int)x-1,(int)(y))) {
-			Sounds.jump.play();
-			vspd = -3.2;
-			jump = false;
-			puloParede = true;
-			direcaoPulo = 2;
-		}
-		if(quantidadeDePulos == 3 && direcaoPulo == 1) {
-			direcaoAtual = esquerda;
-			right = false;
-			speed = 0;
-			x = x + vspd+0.3;
-			timer++;
-			if(timer >= 10) {
-				quantidadeDePulos = 4;
-				timer = 0;
-			}
-		}
-		if(quantidadeDePulos == 3 && direcaoPulo == 2) {
-			direcaoAtual = direita;
-			left = false;
-			speed = 0;
-			x = x - vspd-0.3;
-			timer++;
-			if(timer >= 10) {
-				quantidadeDePulos = 4;
-				timer = 0;
-			}
-		}
-		
+		jump= false;
+		System.out.println(jump);
 		
 		if(coliding((int)x,(int)(y+vspd))) {
 			int signVsp = 0;

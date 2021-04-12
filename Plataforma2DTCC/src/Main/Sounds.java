@@ -64,7 +64,7 @@ public static class Clips{
 
 }
 
-public static Clips music = load("/intro.wav",1);
+public static Clips music = load("/lighthearted.wav",2);
 public static Clips jump2 = load("/secondtJump.wav",1);
 public static Clips jump = load("/secondtJump.wav",1);
 

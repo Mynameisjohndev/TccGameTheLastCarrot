@@ -79,10 +79,6 @@ public class Game extends Canvas implements Runnable, KeyListener{
 	public static List<AtaqueRight> ataquesr;
 	
 	public Game() {
-		Sounds.music.loop();
-		Sounds.jump.setVolume(-20);
-		Sounds.jump2.setVolume(-20);
-		Sounds.music.setVolume(-20);
 		addKeyListener(this);
 		this.setPreferredSize(new Dimension(WIDTH*SCALE, HEIGHT*SCALE));
 		initFrame();
@@ -116,7 +112,8 @@ public class Game extends Canvas implements Runnable, KeyListener{
 		jframe.setLocationRelativeTo(null);
 		jframe.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		jframe.setVisible(true);
-		
+		Sounds.music.loop();
+		Sounds.music.setVolume(0);
 	}
 	
 	
@@ -151,7 +148,6 @@ public class Game extends Canvas implements Runnable, KeyListener{
 				int[]opt2 = {this.level, (int)Player.life};
 				Menu.saveGame(opt1,opt2,10);
 				System.out.println("Jogo salvo");
-				
 			}
 			
 			if(goblin.size() == 0) {

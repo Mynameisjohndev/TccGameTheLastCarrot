@@ -241,42 +241,22 @@ public class Player extends Entity {
 //				timer = 0;
 //			}
 //		}
-		puloParede = false;
-		if(coliding((int)x+1,(int)(y)) && jump
-		|| coliding((int)x-1,(int)(y)) && jump) {
-			//puloParede = true;
-			quantidadeDePulos = 3;
-		}
 		
-		if(puloParede == false) {			
-			if(quantidadeDePulos >= 0 && quantidadeDePulos <= 1 && jump) {		
-				if(coliding(this.getX(), this.getY()+1) &&
-						quantidadeDePulos == 0) {
-					Sounds.jump.play();
-					vspd = -3.3;
-					jump = false;
-					quantidadeDePulos++;
-				}else if(!coliding(this.getX(), this.getY()+1)){
-					Sounds.jump2.play();
-					vspd = -2.2;
-					jump = false;
-					if(quantidadeDePulos == 1) {
-						quantidadeDePulos++;
-					}else {
-						quantidadeDePulos+=2;
+			if(coliding((int)x+1,(int)(y)) && jump && right == true
+			|| coliding((int)x-1,(int)(y)) && jump && left == true) {
+						//puloParede = true;
+						quantidadeDePulos = 3;
 					}
-				}
-			}
-		}
-				
-				if( jump == true && coliding((int)x+1,(int)(y))) {
+			
+		
+				if( jump == true && coliding((int)x+1,(int)(y)) && quantidadeDePulos == 3) {
 					Sounds.jump.play();
 					vspd = -3.2;
 					jump = false;
 					puloParede = true;
 					direcaoPulo = 1;
 				}
-				if(jump == true && coliding((int)x-1,(int)(y))) {
+				if(jump == true && coliding((int)x-1,(int)(y))  && quantidadeDePulos == 3) {
 					Sounds.jump.play();
 					vspd = -3.2;
 					jump = false;
@@ -305,9 +285,30 @@ public class Player extends Entity {
 						timer = 0;
 					}
 				}
+				
+
+				if(quantidadeDePulos >= 0 && quantidadeDePulos <= 1 && jump) {		
+					if(coliding(this.getX(), this.getY()+1) &&
+							quantidadeDePulos == 0) {
+						Sounds.jump.play();
+						vspd = -3.3;
+						jump = false;
+						quantidadeDePulos++;
+					}else if(!coliding(this.getX(), this.getY()+1)){
+						Sounds.jump2.play();
+						vspd = -2.2;
+						jump = false;
+						if(quantidadeDePulos == 1) {
+							quantidadeDePulos++;
+						}else {
+							quantidadeDePulos+=2;
+						}
+					}
+				}		
+				
 		
 		jump= false;
-		System.out.println(jump);
+		System.out.println(quantidadeDePulos);
 		
 		if(coliding((int)x,(int)(y+vspd))) {
 			int signVsp = 0;

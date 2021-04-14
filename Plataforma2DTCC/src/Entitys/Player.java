@@ -90,8 +90,6 @@ public class Player extends Entity {
 	}
 
 	public void tick() {
-		Sounds.jump.setVolume(0);
-		Sounds.jump2.setVolume(0);
 		
 		speed = 1;
 		
@@ -248,7 +246,7 @@ public class Player extends Entity {
 						quantidadeDePulos = 3;
 					}
 			
-		
+			puloParede = false;
 				if( jump == true && coliding((int)x+1,(int)(y)) && quantidadeDePulos == 3) {
 					Sounds.jump.play();
 					vspd = -3.2;
@@ -264,6 +262,7 @@ public class Player extends Entity {
 					direcaoPulo = 2;
 				}
 				if(quantidadeDePulos == 3 && direcaoPulo == 1) {
+					ceuright = true;
 					direcaoAtual = esquerda;
 					right = false;
 					speed = 0;
@@ -272,9 +271,11 @@ public class Player extends Entity {
 					if(timer >= 10) {
 						quantidadeDePulos = 4;
 						timer = 0;
+						direcaoPulo = 0;
 					}
 				}
 				if(quantidadeDePulos == 3 && direcaoPulo == 2) {
+					ceuleft = true;
 					direcaoAtual = direita;
 					left = false;
 					speed = 0;
@@ -283,6 +284,7 @@ public class Player extends Entity {
 					if(timer >= 10) {
 						quantidadeDePulos = 4;
 						timer = 0;
+						direcaoPulo = 0;
 					}
 				}
 				
@@ -331,7 +333,6 @@ public class Player extends Entity {
 					if(e instanceof Goblin) {
 						if(damage(this.getX(), this.getY())) {
 							Sounds.jump.play();
-							Sounds.jump.setVolume(-20);
 							vspd = -2.5;
 							goblinAtual.life--;
 							if(goblinAtual.life == 0) {

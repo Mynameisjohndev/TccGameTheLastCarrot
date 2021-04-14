@@ -113,7 +113,9 @@ public class Game extends Canvas implements Runnable, KeyListener{
 		jframe.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		jframe.setVisible(true);
 		Sounds.music.loop();
-		Sounds.music.setVolume(0);
+		Sounds.music.setVolume(-25);
+		Sounds.jump.setVolume(-25);
+		Sounds.jump2.setVolume(-25);
 	}
 	
 	

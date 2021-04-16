@@ -439,6 +439,10 @@ public class Player extends Entity {
 			//VERIFICA A COLISAO COM O NPC
 		}
 		
+		if(colidingJump(this.getX(), this.getY())) {
+			System.out.println("SS");
+		}
+		
 		Camera.x = Camera.clamp(this.getX() - (Game.WIDTH/2), 0, World.Level.WIDTH*16 - Game.WIDTH);
 		Camera.y = Camera.clamp(this.getY() - (Game.HEIGHT/2), 0, World.Level.HEIGHT*16 - Game.HEIGHT);
 	 
@@ -495,6 +499,21 @@ public class Player extends Entity {
 				}
 			}
 		}
+	}
+	
+	public boolean colidingJump(int nextx, int nexty) {
+		Rectangle player = new Rectangle(nextx + maskxp, nexty + maskyp, maskwp, maskhp);
+		for(int i = 0; i < Game.entidades.size(); i++) {
+			Entity entidade = Game.entidades.get(i);
+			if(entidade instanceof WallJump) {
+				Rectangle solido = new Rectangle(entidade.getX() + maskx, entidade.getY() + masky, maskw,maskh);
+				if(player.intersects(solido)) {
+					entidadeAtual = entidade;
+					return true;
+				}
+			}
+		}
+		return false;
 	}
 	
 	public boolean coliding(int nextx, int nexty) {

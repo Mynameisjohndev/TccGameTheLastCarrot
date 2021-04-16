@@ -19,6 +19,7 @@ import Entitys.NPC1;
 import Entitys.Player;
 import Entitys.Sky;
 import Entitys.Solido;
+import Entitys.WallJump;
 import Main.Game;
 import graphics.Spritsheet;
 
@@ -86,7 +87,14 @@ public class Level {
 					}else if(pixelAtual == 0xFF552101) {
 						Solido solido = new Solido(x*16,y*16,16,16,Entity.outro);
 						Game.entidades.add(solido);
+					}else if(pixelAtual == 0xFFb32409) {
+						//TILE TTERRA JUMP
+						WallJump solido = new WallJump(x*16,y*16,16,16,Entity.chaoGrama);
+						Game.entidades.add(solido);
 					}
+					
+					
+					
 				}
 			}
 		

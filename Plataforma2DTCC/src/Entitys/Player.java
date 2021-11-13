@@ -13,7 +13,7 @@ public class Player extends Entity {
 
 	public boolean right,left,up,down ;
 	public double speed = 1;
-	
+	public int QUANTIDADE_$_DEDEDED = 2;
 	public int direita = 1, esquerda = 0;
 	public int direcaoAtual = direita;
 	public int movimentacao = 0;
@@ -240,55 +240,57 @@ public class Player extends Entity {
 //			}
 //		}
 		
-			if(coliding((int)x+1,(int)(y)) && jump && right == true
-			|| coliding((int)x-1,(int)(y)) && jump && left == true) {
-						//puloParede = true;
-						quantidadeDePulos = 3;
-					}
+		
+		//CODIGO PARA NAO PULAR NA PAREDE
+//			if(coliding((int)x+1,(int)(y)) && jump && right == true
+//			|| coliding((int)x-1,(int)(y)) && jump && left == true) {
+//						//puloParede = true;
+//						quantidadeDePulos = 2;
+//			}
 			
 			puloParede = false;
-				if( jump == true && coliding((int)x+1,(int)(y)) && quantidadeDePulos == 3) {
-					Sounds.jump.play();
-					vspd = -3.2;
-					jump = false;
-					puloParede = true;
-					direcaoPulo = 1;
-				}
-				if(jump == true && coliding((int)x-1,(int)(y))  && quantidadeDePulos == 3) {
-					Sounds.jump.play();
-					vspd = -3.2;
-					jump = false;
-					puloParede = true;
-					direcaoPulo = 2;
-				}
-				if(quantidadeDePulos == 3 && direcaoPulo == 1) {
-					ceuright = true;
-					direcaoAtual = esquerda;
-					right = false;
-					speed = 0;
-					x = x + vspd+0.3;
-					timer++;
-					if(timer >= 10) {
-						quantidadeDePulos = 4;
-						timer = 0;
-						direcaoPulo = 0;
-					}
-				}
-				if(quantidadeDePulos == 3 && direcaoPulo == 2) {
-					ceuleft = true;
-					direcaoAtual = direita;
-					left = false;
-					speed = 0;
-					x = x - vspd-0.3;
-					timer++;
-					if(timer >= 10) {
-						quantidadeDePulos = 4;
-						timer = 0;
-						direcaoPulo = 0;
-					}
-				}
+//				if( jump == true && coliding((int)x+1,(int)(y)) && quantidadeDePulos == 3) {
+//					Sounds.jump.play();
+//					vspd = -3.2;
+//					jump = false;
+//					puloParede = true;
+//					direcaoPulo = 1;
+//				}
+//				if(jump == true && coliding((int)x-1,(int)(y))  && quantidadeDePulos == 3) {
+//					Sounds.jump.play();
+//					vspd = -3.2;
+//					jump = false;
+//					puloParede = true;
+//					direcaoPulo = 2;
+//				}
+//				if(quantidadeDePulos == 3 && direcaoPulo == 1) {
+//					ceuright = true;
+//					direcaoAtual = esquerda;
+//					right = false;
+//					speed = 0;
+//					x = x + vspd+0.3;
+//					timer++;
+//					if(timer >= 10) {
+//						quantidadeDePulos = 4;
+//						timer = 0;
+//						direcaoPulo = 0;
+//					}
+//				}
+//				if(quantidadeDePulos == 3 && direcaoPulo == 2) {
+//					ceuleft = true;
+//					direcaoAtual = direita;
+//					left = false;
+//					speed = 0;
+//					x = x - vspd-0.3;
+//					timer++;
+//					if(timer >= 10) {
+//						quantidadeDePulos = 4;
+//						timer = 0;
+//						direcaoPulo = 0;
+//					}
+//				}
 				
-
+			if(chat == false) {
 				if(quantidadeDePulos >= 0 && quantidadeDePulos <= 1 && jump) {		
 					if(coliding(this.getX(), this.getY()+1) &&
 							quantidadeDePulos == 0) {
@@ -307,10 +309,10 @@ public class Player extends Entity {
 						}
 					}
 				}		
-				
+			}	
 		
 		jump= false;
-		System.out.println(quantidadeDePulos);
+		//System.out.println(quantidadeDePulos);
 		
 		if(coliding((int)x,(int)(y+vspd))) {
 			int signVsp = 0;
@@ -384,7 +386,7 @@ public class Player extends Entity {
 		
 		//MISSAO
 		if(missao == 1 && itemLife == 5 && itemCarrot == 5 ) {
-			System.out.println("Missão completada");
+			//System.out.println("Missão completada");
 		}
 		
 		movimentacao = 0;
@@ -434,19 +436,9 @@ public class Player extends Entity {
 			Game.gameState = "gameOver";
 		}
 	
-		
-		if(npc(this.getX(), this.getY())) {
-			//VERIFICA A COLISAO COM O NPC
-		}
-		
-		if(colidingJump(this.getX(), this.getY())) {
-			System.out.println("SS");
-		}
-		
 		Camera.x = Camera.clamp(this.getX() - (Game.WIDTH/2), 0, World.Level.WIDTH*16 - Game.WIDTH);
 		Camera.y = Camera.clamp(this.getY() - (Game.HEIGHT/2), 0, World.Level.HEIGHT*16 - Game.HEIGHT);
 	 
-	
 		checkLIfe();
 		checkCarrot();
 		
@@ -482,7 +474,7 @@ public class Player extends Entity {
 					}else if(life == 100) {
 						itemLife++;
 						Game.heart.remove(heart);
-						System.out.println(itemLife);
+						//System.out.println(itemLife);
 					}
 				}
 			}

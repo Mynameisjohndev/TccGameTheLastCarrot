@@ -12,6 +12,7 @@ import java.awt.image.BufferStrategy;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 
 import javax.swing.JFrame;
 
@@ -141,6 +142,7 @@ public class Game extends Canvas implements Runnable, KeyListener{
 	}
 	
 	public void tick() {
+	
 		
 		if(gameState == "Normal") {
 			restartGame = false;
@@ -346,8 +348,14 @@ public class Game extends Canvas implements Runnable, KeyListener{
 		//MOVIMENTAÇÃO
 		if(e.getKeyCode() == KeyEvent.VK_D) {
 			player.right = true;
+			if(NPC1.currentOption == 2) {
+				NPC1.right = true;
+			}
 		}else if(e.getKeyCode() == KeyEvent.VK_A) {
 			player.left = true;
+			if(NPC1.currentOption == 2) {
+				NPC1.left = true;
+			}
 		}
 		
 		//JUMP

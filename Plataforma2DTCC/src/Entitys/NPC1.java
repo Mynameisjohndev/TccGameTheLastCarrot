@@ -5,6 +5,10 @@ import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
+import java.util.ArrayList;
+import java.util.Random;
+import java.util.Collections;
+import java.util.List;
 
 import Main.Game;
 import World.Camera;
@@ -16,14 +20,27 @@ public class NPC1  extends Entity{
 	private BufferedImage npc[];
 	private int maskx = 0, masky = 0, maskw = 16, maskh = 16;
 	
+	public  String[] respotas = {"0","1","2"};
+	public  int current = 0;
+	public int max = respotas.length-1;
+	
 	public boolean colisao = false;
 	public boolean chat = false;
 	public boolean finalChat = false;
 	public static boolean enter = false;
-	public String[] frases = new String [5];
-	public String[] options = {"1","2","3"};
-	public int currentOption = 0;
+	public String[] frases = new String [4];
+	public String[] options = {"1","2","3","4"};
+	public static int currentOption = 0;
 	public int maxOption = options.length-1;
+	public static boolean right;
+	public static boolean left;
+	public static boolean respota;
+	public static boolean colisaoplayer;
+	
+	Random gerador = new Random();
+	List<Integer> numeros = new ArrayList<Integer>();
+	public static boolean missaoAceita = false;
+	public static int totalColetar = 0;
 	
 	public NPC1(int x, int y, int Width, int Height, BufferedImage sprite) {
 		super(x, y, Width, Height, sprite);
@@ -33,22 +50,68 @@ public class NPC1  extends Entity{
 			npc[i] = Game.spritsheet.getSprite(80 + (16*i), 128, 16, 16);
 		}
 		
-		frases[0] = "Olá, bem vindo ao jogo : )";
-		frases[1] = "Sua missão é derrotar estes inimigos : )";
+		int rand = gerador.nextInt(3);
+		if(rand == 0) {
+			frases[0] = "Olá, bem vindo ao jogo!";
+			frases[1] = "Resolva esta equação para passar de fase";
+			frases[2] = "Qual a multiplicação de 2+6?";
+			totalColetar = 8;
+			numeros.add(8);
+			numeros.add(13);
+			numeros.add(5);
+		}else if(rand == 1) {
+			frases[0] = "Olá, bem vindo ao jogo!";
+			frases[1] = "Resolva esta equação para passar de fase";
+			frases[2] = "Qual a multiplicação de 2x4?";
+			totalColetar = 8;
+			numeros.add(1);
+			numeros.add(8);
+			numeros.add(13);
+		}else if(rand == 2) {
+			frases[0] = "Olá, bem vindo ao jogo!";
+			frases[1] = "Resolva esta equação para passar de fase";
+			frases[2] = "Qual a multiplicação de 7-2?";
+			totalColetar = 5;
+			numeros.add(5);
+			numeros.add(3);
+			numeros.add(9);
+		}
+		Collections.shuffle(numeros);
+		
 	}
 	
 	
 	public void tick() {
 		
+		this.colisaoplayer = false;
+		
+		if(left == true) {
+			left = false;
+			current--;
+			if(current < 0) 
+				current =	max;
+		}
+		
+		if(right == true) {
+			right = false;
+			current++;
+			if(current > max) 
+				current =	0;
+		}
+		
 		if(!colidingSolido((int)x, (int)(y+1))) {
 			y+=2;
 		}
 		
-		if(enter) {
+		if(enter && coliding(this.getX(), this.getY())) {
 			enter = false;
 			currentOption++;
-			if(currentOption >maxOption) {
+			if(currentOption > maxOption) {
 				currentOption = maxOption;
+			}
+			System.out.println(currentOption);
+			if(numeros.get(current) == totalColetar && currentOption == 2) {
+				missaoAceita = true;
 			}
 		}
 		
@@ -94,6 +157,7 @@ public class NPC1  extends Entity{
 			if(entidade instanceof Player) {
 				Rectangle solido = new Rectangle(entidade.getX() + maskx, entidade.getY() + masky, maskw,maskh);
 				if(player.intersects(solido)) {
+					colisaoplayer = true;
 					return true;
 				}
 			}
@@ -110,16 +174,45 @@ public class NPC1  extends Entity{
 		
 		if(coliding(this.getX(), this.getY()) && chat == true && currentOption < maxOption) {
 			Game.player.chat = true;
-			g.setColor(new Color(0,0,0,100));
-			g.fillRect(10, 71, Game.WIDTH-20, 58);
 			
+			g.setColor(Color.BLACK);
+			g.fillRect(9, 85, Game.WIDTH-18, 27);
+			
+			
+			//g.setColor(Color.WHITE);
+			g.setColor(new Color(220,220,220,220));
+			g.fillRect(10,86, Game.WIDTH-20, 25);
 			g.setFont(new Font("Arial", Font.BOLD, 9));
 			g.setColor(Color.black);
-			g.drawString(frases[currentOption], 15,80);		
+			g.drawString(frases[currentOption], 15,102);	
+			
 			if(currentOption == 1 && Game.player.missao == 0) {
 				Game.player.missao = 1;
-				System.out.println("new mission");
 			}
+			
+			if(currentOption == 2) {
+				if(respotas[current] == "0") {
+					g.setColor(Color.black);
+					g.fillRect(9, 114, 37, 17);
+				}else if (respotas[current] == "1") {
+					g.setColor(Color.black);
+					g.fillRect(51, 114, 37, 17);
+				}else if(respotas[current] == "2") {
+					g.setColor(Color.black);
+					g.fillRect(93, 114, 37, 17);
+				}
+				int [] inter= {36,76,116};
+				int [] eixoX= {10,52,94};
+				for(int i = 0; i<3;i++) {					
+					g.setColor(new Color(220,220,220,220));
+					g.fillRect(eixoX[i], 115, 35, 15);
+					g.setFont(new Font("Arial", Font.BOLD, 9));
+					g.setColor(Color.black);
+					g.drawString(numeros.get(i).toString(), inter[i],126);
+				}
+			}
+			
+			
 		}else {
 			Game.player.chat = false;
 		}

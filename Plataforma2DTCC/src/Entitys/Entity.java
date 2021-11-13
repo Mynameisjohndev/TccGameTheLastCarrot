@@ -27,7 +27,8 @@ public class Entity {
 	public static BufferedImage outro = Game.spritsheet.getSprite(64, 112, 16, 16);
 	
 	///sprites diferentes
-	public static BufferedImage hud = Game.hud.getSprite(0, 0, 130, 32);
+	public static BufferedImage hud = Game.hud.getSprite(0, 0, 134, 75);
+	public static BufferedImage mensagem = Game.hud.getSprite(0, 45, 133, 44);
 	public static BufferedImage sky =  Game.skySprite.getSprite(0, 0, 2080, 520);
 	public static BufferedImage background =  Game.backgroundSprite.getSprite(0, 0, 2080, 320);
 	

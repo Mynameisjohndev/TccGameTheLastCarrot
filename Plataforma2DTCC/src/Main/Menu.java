@@ -18,9 +18,9 @@ import Entitys.Player;
 public class Menu {
 
 	public  String[] options = {"NOVO JOGO","CARREGAR JOGO","SAIR"};
-	public static  boolean pause = false;
 	public  int currentOption = 0;
 	public int maxOption = options.length-1;
+	public static  boolean pause = false;
 	public boolean up,down,enter;
 	
 	public static boolean saveExist = false;

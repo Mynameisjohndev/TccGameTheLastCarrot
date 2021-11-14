@@ -41,6 +41,7 @@ public class NPC1  extends Entity{
 	List<Integer> numeros = new ArrayList<Integer>();
 	public static boolean missaoAceita = false;
 	public static int totalColetar = 0;
+	public static String totalColetarString = "";	
 	
 	public NPC1(int x, int y, int Width, int Height, BufferedImage sprite) {
 		super(x, y, Width, Height, sprite);
@@ -56,6 +57,7 @@ public class NPC1  extends Entity{
 			frases[1] = "Resolva esta equação para passar de fase";
 			frases[2] = "Qual a multiplicação de 2+6?";
 			totalColetar = 8;
+			totalColetarString = "8";
 			numeros.add(13);
 			numeros.add(5);
 			numeros.add(3);
@@ -65,6 +67,7 @@ public class NPC1  extends Entity{
 			frases[1] = "Resolva esta equação para passar de fase";
 			frases[2] = "Qual a multiplicação de 2x3?";
 			totalColetar = 6;
+			totalColetarString = "6";
 			numeros.add(1);
 			numeros.add(0);
 			numeros.add(6);
@@ -74,6 +77,7 @@ public class NPC1  extends Entity{
 			frases[1] = "Resolva esta equação para passar de fase";
 			frases[2] = "Qual a multiplicação de 7-2?";
 			totalColetar = 5;
+			totalColetarString = "5";
 			numeros.add(5);
 			numeros.add(13);
 			numeros.add(3);
@@ -112,9 +116,11 @@ public class NPC1  extends Entity{
 			if(currentOption > maxOption) {
 				currentOption = maxOption;
 			}
-			System.out.println(currentOption);
+			//System.out.println(currentOption);
 			if(numeros.get(current) == totalColetar && currentOption == maxOption) {
 				missaoAceita = true;
+				System.out.println(totalColetar);
+				//System.out.println(totalColetarString);
 			}
 		}
 		

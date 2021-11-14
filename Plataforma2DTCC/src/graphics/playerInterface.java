@@ -35,7 +35,7 @@ public class playerInterface {
 		g.drawString("" + Game.player.itemCarrot, 15, 44);
 		g.setFont(new Font("arial",Font.BOLD,9));
 		if(NPC1.missaoAceita == true){
-			g.drawString("Colete 14 cenouras", 8, 56);
+			g.drawString("Colete " + NPC1.totalColetarString + " cenouras", 8, 56);
 		}
 		
 	

@@ -20,7 +20,7 @@ public class NPC1  extends Entity{
 	private BufferedImage npc[];
 	private int maskx = 0, masky = 0, maskw = 16, maskh = 16;
 	
-	public  String[] respotas = {"0","1","2"};
+	public  String[] respotas = {"0","1","2","3"};
 	public  int current = 0;
 	public int max = respotas.length-1;
 	
@@ -56,16 +56,18 @@ public class NPC1  extends Entity{
 			frases[1] = "Resolva esta equação para passar de fase";
 			frases[2] = "Qual a multiplicação de 2+6?";
 			totalColetar = 8;
-			numeros.add(8);
 			numeros.add(13);
 			numeros.add(5);
+			numeros.add(3);
+			numeros.add(8);
 		}else if(rand == 1) {
 			frases[0] = "Olá, bem vindo ao jogo!";
 			frases[1] = "Resolva esta equação para passar de fase";
-			frases[2] = "Qual a multiplicação de 2x4?";
-			totalColetar = 8;
+			frases[2] = "Qual a multiplicação de 2x3?";
+			totalColetar = 6;
 			numeros.add(1);
-			numeros.add(8);
+			numeros.add(0);
+			numeros.add(6);
 			numeros.add(13);
 		}else if(rand == 2) {
 			frases[0] = "Olá, bem vindo ao jogo!";
@@ -73,10 +75,11 @@ public class NPC1  extends Entity{
 			frases[2] = "Qual a multiplicação de 7-2?";
 			totalColetar = 5;
 			numeros.add(5);
+			numeros.add(13);
 			numeros.add(3);
 			numeros.add(9);
 		}
-		Collections.shuffle(numeros);
+		//Collections.shuffle(numeros);
 		
 	}
 	
@@ -85,7 +88,7 @@ public class NPC1  extends Entity{
 		
 		this.colisaoplayer = false;
 		
-		if(left == true) {
+		if(left == true ) {
 			left = false;
 			current--;
 			if(current < 0) 
@@ -110,7 +113,7 @@ public class NPC1  extends Entity{
 				currentOption = maxOption;
 			}
 			System.out.println(currentOption);
-			if(numeros.get(current) == totalColetar && currentOption == 2) {
+			if(numeros.get(current) == totalColetar && currentOption == maxOption) {
 				missaoAceita = true;
 			}
 		}
@@ -200,10 +203,13 @@ public class NPC1  extends Entity{
 				}else if(respotas[current] == "2") {
 					g.setColor(Color.black);
 					g.fillRect(93, 114, 37, 17);
+				}else if(respotas[current] == "3") {
+					g.setColor(Color.black);
+					g.fillRect(135, 114, 37, 17);
 				}
-				int [] inter= {36,76,116};
-				int [] eixoX= {10,52,94};
-				for(int i = 0; i<3;i++) {					
+				int [] inter= {36,76,116,156};
+				int [] eixoX= {10,52,94,136};
+				for(int i = 0; i<4;i++) {					
 					g.setColor(new Color(220,220,220,220));
 					g.fillRect(eixoX[i], 115, 35, 15);
 					g.setFont(new Font("Arial", Font.BOLD, 9));

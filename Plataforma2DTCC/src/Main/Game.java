@@ -397,6 +397,11 @@ public class Game extends Canvas implements Runnable, KeyListener{
 			}
 	    }
 		
+		if(e.getKeyCode() == KeyEvent.VK_R) {
+			NPC1.respota = true;
+		}
+		
+		
 	}
 
 	@Override

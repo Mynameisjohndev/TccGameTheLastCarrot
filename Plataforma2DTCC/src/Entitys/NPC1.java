@@ -52,36 +52,70 @@ public class NPC1  extends Entity{
 		}
 		
 		int rand = gerador.nextInt(3);
-		if(rand == 0) {
-			frases[0] = "Olá, bem vindo ao jogo!";
-			frases[1] = "Resolva esta equação para passar de fase";
-			frases[2] = "Qual a multiplicação de 2+6?";
-			totalColetar = 8;
-			totalColetarString = "8";
-			numeros.add(13);
-			numeros.add(5);
-			numeros.add(3);
-			numeros.add(8);
-		}else if(rand == 1) {
-			frases[0] = "Olá, bem vindo ao jogo!";
-			frases[1] = "Resolva esta equação para passar de fase";
-			frases[2] = "Qual a multiplicação de 2x3?";
-			totalColetar = 6;
-			totalColetarString = "6";
-			numeros.add(1);
-			numeros.add(0);
-			numeros.add(6);
-			numeros.add(13);
-		}else if(rand == 2) {
-			frases[0] = "Olá, bem vindo ao jogo!";
-			frases[1] = "Resolva esta equação para passar de fase";
-			frases[2] = "Qual a multiplicação de 7-2?";
-			totalColetar = 5;
-			totalColetarString = "5";
-			numeros.add(5);
-			numeros.add(13);
-			numeros.add(3);
-			numeros.add(9);
+		if(Game.level == 1) {			
+			if(rand == 0) {
+				frases[0] = "Olá, bem vindo ao seu desafio!";
+				frases[1] = "Resolva esta equação para passar de fase";
+				frases[2] = "Qual a multiplicação de 2+6?";
+				totalColetar = 8;
+				totalColetarString = "8";
+				numeros.add(13);
+				numeros.add(5);
+				numeros.add(3);
+				numeros.add(8);
+			}else if(rand == 1) {
+				frases[0] = "Olá, bem vindo ao seu desafio!";
+				frases[1] = "Resolva esta equação para passar de fase";
+				frases[2] = "Qual a multiplicação de 2x3?";
+				totalColetar = 6;
+				totalColetarString = "6";
+				numeros.add(1);
+				numeros.add(0);
+				numeros.add(6);
+				numeros.add(13);
+			}else if(rand == 2) {
+				frases[0] = "Olá, bem vindo ao seu desafio!";
+				frases[1] = "Resolva esta equação para passar de fase";
+				frases[2] = "Qual a multiplicação de 7-2?";
+				totalColetar = 5;
+				totalColetarString = "5";
+				numeros.add(5);
+				numeros.add(13);
+				numeros.add(3);
+				numeros.add(9);
+			}
+		}else if (Game.level == 2) {
+			if(rand == 0) {
+				frases[0] = "Olá, bem vindo ao seu desafio!";
+				frases[1] = "Resolva esta equação para passar de fase";
+				frases[2] = "Qual a multiplicação de 19-13?";
+				totalColetar = 6;
+				totalColetarString = "6";
+				numeros.add(3);
+				numeros.add(6);
+				numeros.add(43);
+				numeros.add(5);
+			}else if(rand == 1) {
+				frases[0] = "Olá, bem vindo ao seu desafio!";
+				frases[1] = "Resolva esta equação para passar de fase";
+				frases[2] = "Qual a multiplicação de 2x4?";
+				totalColetar = 8;
+				totalColetarString = "8";
+				numeros.add(8);
+				numeros.add(70);
+				numeros.add(6);
+				numeros.add(3);
+			}else if(rand == 2) {
+				frases[0] = "Olá, bem vindo ao seu desafio!";
+				frases[1] = "Resolva esta equação para passar de fase";
+				frases[2] = "Qual a multiplicação de 7-0?";
+				totalColetar = 7;
+				totalColetarString = "7";
+				numeros.add(45);
+				numeros.add(7);
+				numeros.add(3);
+				numeros.add(0);
+			}
 		}
 		//Collections.shuffle(numeros);
 		

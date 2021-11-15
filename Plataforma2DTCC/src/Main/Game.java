@@ -60,7 +60,7 @@ public class Game extends Canvas implements Runnable, KeyListener{
 	public static List<Goblin> goblin; 
 	
 	public playerInterface lifeBar;
-	public int level = 1;
+	public static int level = 1;
 
 	public static int maxLevel = 2;
 	
@@ -155,13 +155,15 @@ public class Game extends Canvas implements Runnable, KeyListener{
 				System.out.println("Jogo salvo");
 			}
 			
-			if(goblin.size() == 0) {
+			if(Player.itemCarrot == NPC1.totalColetar && NPC1.missaoAceita == true) {
 				level++;
 				if(level > maxLevel) {
 					level = 1;
 				}
 				String Level = "level"+level+".png";
 				World.Level.newLevel(Level);
+				Player.itemCarrot = 0;
+				NPC1.missaoAceita = false;
 			}
 			
 			for(int i =0; i < goblin.size(); i++) {
